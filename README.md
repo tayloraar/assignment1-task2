@@ -1,12 +1,11 @@
 # sit725-assignment1
 
-Task Overview, notes and to do:
-
+# Task Overview
 Assignment overview:
 Individual 12.5% (HD)
 Of a total of 25% for assignment 1.
 
-Summary
+# Task Summary
 HD Task
 You must extend your P task to include the HD extension here. As you can see, the task is thesame except for the HD part, meaning that the minimum you have to complete is the non-bold part.
 Each project requires you to write a very simple prototype to showcase your knowledge ofsoftware development.
@@ -27,7 +26,25 @@ You are to create a small web application with the specifications provided here,
 Remember that you can only use the technologies allowed in the unit. If you don’t remember, please check the Lecture Slides 1.
 The application has to work, the quality and well functioning will decide your grade for this Task
 
-Instagram
+# Instagram
 Create a simple view where you can see pictures and descriptions, with some comments on them.
 Allow the system to let the user be able to create a new post and show it on the screen, this should include a description.
 HD - create the system using a DB (I suggest Mongo Atlas)
+
+# Notes to self:
+- Maybe think about how the data will be stored in the database?
+
+        Post{
+            >User Key?
+            >Image URL
+            >Caption
+            >Comments{
+                Comment Array?
+            }
+        } 
+        Will this work? Consider?
+
+- Three other thigns to consider on the DB end:
+1. Do I try and let the user 'post' images as an extra stretch?
+2. Do I try and get the app working using promises?
+3. What about a socket?
