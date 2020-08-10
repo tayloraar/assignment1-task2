@@ -1,0 +1,51 @@
+/* Modified some of the Materialize styles, this is a masters subject and this is basic,
+so I won't really provide any extra information on this */
+
+body {
+    background-color: #293438;
+    font-family: 'Roboto Condensed';
+}
+
+nav{
+    background-color: #A54657;
+}
+
+.sidenav{
+    background-color: #F5F5F5;
+}
+
+.btn-floating{
+   background-color: #A54657;
+}
+
+.btn-floating:hover{
+    background-color: #D8798A;
+}
+
+.card{
+    background-color: #F5F5F5;
+}
+
+.userName{
+    padding-left: 10px;
+}
+
+.btn {
+    background-color: #A54657;
+    font-weight: bold;
+}
+ 
+.btn:hover{
+     background-color: #D8798A;
+     font-weight: bold;
+}
+ 
+.username{
+    font-weight: bold;
+    color: #F5F5F5;
+}
+
+.background{
+    background-color: #293438;
+    font-family: 'Roboto Condensed';
+}
