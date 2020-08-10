@@ -26,7 +26,7 @@ app.get("/comments", function(req,res){
     retrieveComment(res);
    })
 
-   app.get("/postnum", function(req,res){
+app.get("/postnum", function(req,res){
     retrievePostNum(res);
    })
 
