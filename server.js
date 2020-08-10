@@ -22,6 +22,15 @@ app.get("/comment",function(req,res){
     res.send("added");
 })
 
+app.get("/newPost",function(req,res){
+    let user=req.query.user;
+    let image=req.query.image;
+    let caption=req.query.caption;
+    let postNum=req.query.postNum;
+    insertPost(user,image,caption,postNum);
+    res.send("added");
+})
+
 app.get("/comments", function(req,res){
     retrieveComment(res);
    })
@@ -56,10 +65,15 @@ client.connect(err => {
     
   });
   
-//insterting into collections
+//insterting into Comment Collection
 const insertComment=(comment,commentId)=>{
    collectionComments.insertOne({comments:comment, commentId:commentId});
 };
+
+//insterting into Posts Collection
+const insertPost=(user,image,caption,postNum)=>{
+    collectionPosts.insertOne({user:user, image:image, caption:caption, postNum:postNum});
+ };
 
 //retreiving from collections
 const retrieveComment=(res)=>{
