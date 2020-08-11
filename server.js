@@ -1,12 +1,13 @@
 
 // This is the webserver and end points used in this application.
 
-
+var open = require("open");
 var express = require('express');
 var moment = require('moment');
 var app=express();
 const MongoClient = require('mongodb').MongoClient;
 app.use(express.static(__dirname + '/public'));
+
 
 var log = function(message){
   var time=moment().format();
@@ -16,6 +17,23 @@ var log = function(message){
 var port = 3000;
 app.listen(port);
 log(`server listening on: ${port}`);
+
+// DataBase Management.
+const uri = "mongodb+srv://sit725:sit725@sit725-assignment1-task.la1a9.mongodb.net/insta?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true });
+
+// Setting collection variables
+var collectionMessages;
+var collectionComments;
+var collectionPosts;
+
+
+// Connecting collection variables to database collections
+client.connect(err => {
+  collectionMessages = client.db("insta").collection("messages");
+  collectionComments = client.db("insta").collection("comments");
+  collectionPosts = client.db("insta").collection("posts"); 
+});
 
 app.get("/comment",function(req,res){
   let comment=req.query.comment;
@@ -41,22 +59,6 @@ app.get("/postnum", function(req,res){
   retrievePostNum(res);
 });
 
-// DataBase Management.
-const uri = "mongodb+srv://sit725:sit725@sit725-assignment1-task.la1a9.mongodb.net/insta?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-
-// Setting collection variables
-let collectionMessages;
-let collectionComments;
-let collectionPosts;
-
-
-// Connecting collection variables to database collections
-client.connect(err => {
-  collectionMessages = client.db("insta").collection("messages");
-  collectionComments = client.db("insta").collection("comments");
-  collectionPosts = client.db("insta").collection("posts"); 
-});
 
 // Insterting into Comment Collection
 const insertComment=(comment,commentId)=>{
@@ -83,3 +85,7 @@ const retrievePostNum=(res)=>{
     res.send(result);
   });
 }
+
+setTimeout( function(){
+  open("http://localhost:3000/");
+ }, 2000 );
