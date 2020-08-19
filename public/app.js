@@ -4,7 +4,8 @@ $(document).ready(function(){
 
   // Tell us the document is ready and set up 'sidenav' for the new post window.
   console.log("Document ready");
-  $('.sidenav').sidenav();
+  $('.modal').modal();
+  // $('.sidenav').sidenav();
 
   // Load - posts, set up HTML, link buttons and provide constant pull for messages.
   $.get("/postnum", function(posts){

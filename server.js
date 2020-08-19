@@ -20,7 +20,7 @@ log(`server listening on: ${port}`);
 
 // DataBase Management.
 const uri = "mongodb+srv://sit725:sit725@sit725-assignment1-task.la1a9.mongodb.net/insta?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Setting collection variables
 var collectionMessages;
