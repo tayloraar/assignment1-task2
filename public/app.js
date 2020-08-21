@@ -4,8 +4,8 @@ $(document).ready(function(){
 
   // Tell us the document is ready and set up 'sidenav' for the new post window.
   console.log("Document ready");
-  $('.sidenav').sidenav();
-
+  $('.modal').modal();
+  
   // Load - posts, set up HTML, link buttons and provide constant pull for messages.
   $.get("/postnum", function(posts){
     $("#mainColum").empty();
@@ -54,50 +54,50 @@ $(document).ready(function(){
           </div>
         </div>`);
 
-      // New Post
-               $(`#postBtn`).click(function(){
-                  console.log(`You hit post button`)
-                  let user = $(`#userNameIn`).val();
-                  let image = $(`#imageUrl`).val();
-                  let caption = $(`#captionIn`).val();
-                  let postNum = postCount + 1;
-                  let data={
-                    user,
-                    image,
-                    caption,
-                    postNum
-                  };
-                  console.log(data)
-                  if(image != ""){
-                    console.log("we have data")
-                  $.get("/newPost", data,function(){
-          
-                  });
-                }
+      // New Post - on click grabs the informaiton wraps it in 'data' and then pushes it to the comment post function.
+      $(`#postBtn`).click(function(){
+        console.log(`You hit post button`)
+        let user = $(`#userNameIn`).val();
+        let image = $(`#imageUrl`).val();
+        let caption = $(`#captionIn`).val();
+        let postNum = postCount + 1;
+        let data={
+          user,
+          image,
+          caption,
+          postNum
+        };
+        if(image != ""){
+        $.ajax({
+            url:"/post",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            type: 'post',
+          });
+        }
+        $(`#input${posts.postNum}`).val(" ");
+        $(`#userNameIn`).val(" ");
+        $(`#imageUrl`).val(" ");
+        $(`#captionIn`).val(" ");
+        location.reload();
+      });
 
-                  $(`#input${posts.postNum}`).val(" ");
-                  $(`#userNameIn`).val(" ");
-                  $(`#imageUrl`).val(" ");
-                  $(`#captionIn`).val(" ");
-                  location.reload();
-  
-            });
-
-      // New Comment
+      // New Comment - on click grabs the informaiton wraps it in 'data' and then pushes it to the comment post function.
       $(`#btnComment${id}`).click(function(){
         console.log(`You hit button id #btnComment${id}`);
-        let comment = $(`#input${posts.postNum}`).val();
+        let comments = $(`#input${posts.postNum}`).val();
         let commentId = id;
         let data={
-          comment,
+          comments,
           commentId
         }
-
-        $.get("/comment", data,function(){
-
-        });
-
-        $(`#input${posts.postNum}`).val(" ");
+        $.ajax({
+          url:"/comment",
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          type: 'post',
+        })
+        $(`#input${posts.postNum}`).val(" "); //empties the fields
       });
 
       // Constant Pull New Comments
