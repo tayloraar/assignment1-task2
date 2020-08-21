@@ -54,39 +54,35 @@ $(document).ready(function(){
           </div>
         </div>`);
 
-      // New Post
-               $(`#postBtn`).click(function(){
-                  console.log(`You hit post button`)
-                  let user = $(`#userNameIn`).val();
-                  let image = $(`#imageUrl`).val();
-                  let caption = $(`#captionIn`).val();
-                  let postNum = postCount + 1;
-                  let data={
-                    user,
-                    image,
-                    caption,
-                    postNum
-                  };
-                  if(image != ""){
-                  $.ajax({
-                      url:"/post",
-                      contentType: 'application/json',
-                      data: JSON.stringify(data),
-                      type: 'post',
-                      // success: function(result){
-                      //   console.log(result);
-                      // }
-                    });
-                  }
+      // New Post - on click grabs the informaiton wraps it in 'data' and then pushes it to the comment post function.
+      $(`#postBtn`).click(function(){
+        console.log(`You hit post button`)
+        let user = $(`#userNameIn`).val();
+        let image = $(`#imageUrl`).val();
+        let caption = $(`#captionIn`).val();
+        let postNum = postCount + 1;
+        let data={
+          user,
+          image,
+          caption,
+          postNum
+        };
+        if(image != ""){
+        $.ajax({
+            url:"/post",
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            type: 'post',
+          });
+        }
+        $(`#input${posts.postNum}`).val(" ");
+        $(`#userNameIn`).val(" ");
+        $(`#imageUrl`).val(" ");
+        $(`#captionIn`).val(" ");
+        location.reload();
+      });
 
-                  $(`#input${posts.postNum}`).val(" ");
-                  $(`#userNameIn`).val(" ");
-                  $(`#imageUrl`).val(" ");
-                  $(`#captionIn`).val(" ");
-                  location.reload();
-            });
-
-      // New Comment
+      // New Comment - on click grabs the informaiton wraps it in 'data' and then pushes it to the comment post function.
       $(`#btnComment${id}`).click(function(){
         console.log(`You hit button id #btnComment${id}`);
         let comments = $(`#input${posts.postNum}`).val();
@@ -100,12 +96,8 @@ $(document).ready(function(){
           contentType: 'application/json',
           data: JSON.stringify(data),
           type: 'post',
-          // success: function(result){
-          //   console.log(result);
-          // }
         })
-
-        $(`#input${posts.postNum}`).val(" ");
+        $(`#input${posts.postNum}`).val(" "); //empties the fields
       });
 
       // Constant Pull New Comments

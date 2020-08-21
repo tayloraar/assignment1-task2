@@ -37,34 +37,18 @@ client.connect(err => {
   collectionPosts = client.db("insta").collection("posts"); 
 });
 
+// Post end points
 app.post("/comment", function(req,res){
-  console.log('body', req.body)
   let comment = req.body;
   insertComment(comment,res);
 })
 
 app.post("/post", function(req,res){
-  console.log('body', req.body)
   let post = req.body;
   insertPost(post,res);
 })
 
-// app.get("/comment",function(req,res){
-//   let comment=req.query.comment;
-//   let commentId=req.query.commentId;
-//   insertComment(comment,commentId);
-//   res.send("added");
-// });
-
-// app.get("/newPost",function(req,res){
-//   let user=req.query.user;
-//   let image=req.query.image;
-//   let caption=req.query.caption;
-//   let postNum=req.query.postNum;
-//   insertPost(user,image,caption,postNum);
-//   res.send("added");
-// });
-
+// Get end points
 app.get("/comments", function(req,res){
   retrieveComment(res);
 });
@@ -72,7 +56,6 @@ app.get("/comments", function(req,res){
 app.get("/postnum", function(req,res){
   retrievePostNum(res);
 });
-
 
 // Insterting into Comment Collection
 const insertComment=(comment,res)=>{
@@ -107,6 +90,7 @@ const retrievePostNum=(res)=>{
   });
 }
 
+// Opens the application after 2 seconds, timer just incase.
 setTimeout( function(){
   open("http://localhost:3000/");
  }, 2000 );
