@@ -5,8 +5,7 @@ $(document).ready(function(){
   // Tell us the document is ready and set up 'sidenav' for the new post window.
   console.log("Document ready");
   $('.modal').modal();
-  // $('.sidenav').sidenav();
-
+  
   // Load - posts, set up HTML, link buttons and provide constant pull for messages.
   $.get("/postnum", function(posts){
     $("#mainColum").empty();
@@ -68,35 +67,43 @@ $(document).ready(function(){
                     caption,
                     postNum
                   };
-                  console.log(data)
                   if(image != ""){
-                    console.log("we have data")
-                  $.get("/newPost", data,function(){
-          
-                  });
-                }
+                  $.ajax({
+                      url:"/post",
+                      contentType: 'application/json',
+                      data: JSON.stringify(data),
+                      type: 'post',
+                      // success: function(result){
+                      //   console.log(result);
+                      // }
+                    });
+                  }
 
                   $(`#input${posts.postNum}`).val(" ");
                   $(`#userNameIn`).val(" ");
                   $(`#imageUrl`).val(" ");
                   $(`#captionIn`).val(" ");
                   location.reload();
-  
             });
 
       // New Comment
       $(`#btnComment${id}`).click(function(){
         console.log(`You hit button id #btnComment${id}`);
-        let comment = $(`#input${posts.postNum}`).val();
+        let comments = $(`#input${posts.postNum}`).val();
         let commentId = id;
         let data={
-          comment,
+          comments,
           commentId
         }
-
-        $.get("/comment", data,function(){
-
-        });
+        $.ajax({
+          url:"/comment",
+          contentType: 'application/json',
+          data: JSON.stringify(data),
+          type: 'post',
+          // success: function(result){
+          //   console.log(result);
+          // }
+        })
 
         $(`#input${posts.postNum}`).val(" ");
       });
