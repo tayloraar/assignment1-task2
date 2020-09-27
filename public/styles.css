@@ -1,0 +1,467 @@
+
+html, body {
+    height: 90vh;
+    width: 95vw;
+    margin: auto;
+    }
+
+    /* welcome screen styles */
+    .welcomeGrid
+{
+  display: grid;
+  grid-template-rows: 3fr 2fr 1fr 6fr 2fr 2fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+    height: 95vh;
+    padding: 0px;
+    background-color: rgb(199, 172, 229);
+    background-image: url('assets/WelcomeBackdrop.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    }
+
+.welcomeHeader
+{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+    grid-column-start: 1;
+    grid-column-end: 4;
+    direction: rtl;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-right: 15px;
+
+}
+
+#description
+{
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  text-align: center;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#gameRoomTitle
+{
+  font-weight: bold;
+  color: rgb(176, 0, 0);
+  font-size: 1.3em;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  margin-top: 15px;
+  margin-left: 15px;
+
+}
+.gameRoom
+{
+    background-color: rgb(255, 255, 255);
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 4;
+    grid-row-end: 5;
+    min-height: 200px;
+    min-width: 370px;
+    padding: 10px;
+    margin: 8px;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+}
+.welcomeJoinGame
+{
+  font-weight: bold;
+  grid-row-start: 5;
+  grid-row-end: 6;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+#waiting
+{
+  color: rgb(176, 0, 0);
+  text-align: left;
+  vertical-align: bottom;
+  margin-bottom: 10px;
+}
+input {
+  width: 50px;
+  background-color: white;
+}
+
+.input-field  {
+  background-color: white;
+  height: 42px;
+  border: bottom 0px;
+  box-shadow: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+
+}
+/* end welcome screen specific styles */
+
+
+.btn-orange {
+  background-color: rgb(255, 98, 0);
+  color: rgb(0, 0, 0);
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  height: 42px;
+  border-radius:5px;
+  font-weight: bold;
+  font-size:0.8em;
+}
+
+    .responsive, image {
+      max-height: 100%;
+      max-width: 100%;
+    }
+
+    #gameboard
+    {
+      background-image: url('assets/Desertscape.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+    .leftGrid {
+      display: grid;
+      grid-column-gap: 3px;
+      grid-row-gap: 3px;
+      grid-template-columns: 5vw 6vw 30vw;
+      grid-template-rows: 4vh 4vh 19vh;
+      padding:3px;
+      margin: auto;
+
+    }
+
+    .rightGrid {
+      display: grid;
+      grid-column-gap: 3px;
+      grid-row-gap: 3px;
+      grid-template-columns: 30vw 6vw 5vw;
+      grid-template-rows: 4vh 4vh 19vh;
+      text-align: right;
+      padding:3px;
+      margin: auto;
+
+    }
+
+.topPane
+{
+  display: grid;
+  grid-template-columns: 45% 10% 45%;
+    background-color: blue;
+    max-height: 30vh;
+    /* width: 100wh; */
+    padding: 0px;
+}
+
+.midPane
+{
+    background-color: red;
+    display: grid;
+    grid-template-columns: 45% 10% 45%;
+    max-height: 30vh;
+      /* width: 100wh; */
+      padding: 0px;
+
+}
+
+.bottomPane
+{
+  background-color: greenyellow;
+  height: 40vh;
+    padding: 10px;
+
+}
+
+.leftGrid .playerName
+{
+  background-color: rgb(248, 245, 251);
+  grid-column-start: 1;
+  grid-column-end: 4;
+
+}
+
+.leftGrid .bulletTray
+{
+  background-color: hotpink;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+
+
+.characterCard
+{
+  background-color: rgb(46, 192, 208);
+
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+.leftGrid .cardsInPlay
+{
+  background-color: rgb(124, 171, 129);
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 4;
+}
+
+.cardsInPlay
+{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.topMiddleGrid
+{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 3fr 7fr 7fr;
+  grid-row-gap: 0px;
+  padding: 0px;
+  max-height: 27vh;
+}
+
+.undercoverRoles
+{
+  background-color: rgb(242, 134, 116);
+  grid-row-start: 2;
+  grid-row-end: 4;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.midMidGrid
+{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-row-gap: 0px;
+  padding: 0px;
+  max-height: 27vh;
+}
+.deckGrid
+{
+  background-color: rgb(135, 126, 125);
+  grid-row-start: 2;
+  grid-row-end: 3;
+  display: grid;
+  grid-column-gap: 5px;
+  grid-template-columns: 1fr 1fr;
+}
+
+.deckInstructions
+{
+  background-color: rgb(207, 179, 203);
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.leftGrid .privateHand
+{
+  background-color: rgb(161, 205, 213);
+
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.rightGrid .playerName
+{
+  background-color: rgb(248, 245, 251);
+  grid-column-start: 1;
+  grid-column-end: 4;
+
+}
+
+
+.rightGrid .bulletTray
+{
+  background-color: hotpink;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+
+
+.rightGrid .cardsInPlay
+{
+  background-color: rgb(237, 255, 188);
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  direction: rtl;
+
+}
+
+.rightGrid .privateHand
+{
+  background-color: rgb(40, 4, 22);
+
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.a5
+{
+  background-color: rgb(108, 75, 108);
+
+}
+
+.b5
+{
+  background-color: rgb(196, 128, 174);
+ 
+}
+
+.c5
+{
+  background-color: rgb(141, 180, 231);
+ 
+}
+
+.d5
+{
+  background-color: rgb(150, 148, 118);
+
+}
+
+.e5
+{
+  background-color: rgb(252, 222, 191);
+
+}
+
+.hidden
+{
+    display: none;
+}
+/* previous
+
+.helloInput {
+    width: 200px;
+  }
+  
+  .title{
+    color: #2c365c;
+  }
+  .mainText{
+    color:#2c365c;
+  }
+  
+  body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #d5e4e0;
+  
+  }
+  
+  nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
+    background-color: rgba(51,51,51,0.08);
+    max-height: 55px;
+  }
+  
+  .page-footer, .page-header {
+    background-color: #d5e4e0;
+  }
+  main {
+    flex: 1 0 auto;
+  }
+   
+ 
+  
+  .center
+  {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .card
+  {
+    background-color: #c5cadf;
+    padding-top: 0px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    display: inline-block;
+  }
+  
+  .modal {
+    padding-bottom: 0px;
+    min-height:580px;
+    overflow: auto; 
+  }
+  .modal-footer {
+    clear:both 
+  }
+  
+  /* used for setting size of mini profile pictures 
+  .miniImg {
+  max-height: 70px;
+  width: auto
+  }
+  
+  .profileCard {
+    max-width: 300px;
+  }
+  .matchCard {
+    max-width: 220px;
+    padding: 5px;
+    display: inline-block;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    vertical-align: top;
+  }
+  
+  /* used for setting images to "medium" size (restricted width, preserving ratio) 
+  .medImg {
+    max-width: 200px;
+    max-height: auto;
+    }
+  
+    .listPane {
+      background-color: white;
+      padding-top: 15px;
+      padding-bottom: 10px;
+      padding-left: 30px;
+      padding-right: 30px;
+      margin-bottom: 20px;
+      margin-top: 5px;
+    }
+  
+    /*keeps match elements on the same line and sets height
+    .matchRow {
+        height: 70px;
+        line-height: 70px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 5%; 
+        font-size:17px;
+      }
+  */
+  
