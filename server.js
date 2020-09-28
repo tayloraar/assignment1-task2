@@ -73,6 +73,13 @@ io.on('connection', (socket) => {
     io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
     }   
      });
+ 
+    //Get text message from client and send to it to all clients
+    socket.on('sendtextchat', function(data) {
+       io.emit("updatechatbox",data)
+       });
+   
+
 
     socket.on('disconnect', (reason) => {
     //When one user disconnect => Update array information and emit to all user about updated array information
