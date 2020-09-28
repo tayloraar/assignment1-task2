@@ -18,12 +18,6 @@
 </head>
 
 <body>
-    <header class="hidden">
-        <!-- might use for registration (rules, etc)-->
-        <nav>
-
-        </nav>
-    </header>
     <main>
 
         <div id="welcomeScreen" class="welcomeGrid">
@@ -40,7 +34,7 @@
             </div>
             <div id="gameRoomTitle">Current gameroom
             </div>
-            
+
 
 
             <div class="gameRoom">
@@ -61,9 +55,9 @@
 
         </div>
 
-        <div id="gameboard" class="hidden">
+        <div id="gameboard" class="">
             <div class="topPane">
-                <div class="a5 leftGrid">
+                <div class="c5 leftGrid">
 
                     <div class="playerName">
                         .playerName
@@ -92,7 +86,7 @@
 
                     </div>
                 </div>
-                <div class="b5 rightGrid">
+                <div class="d5 rightGrid">
 
                     <div class="playerName">
                         .playerName
@@ -119,7 +113,7 @@
 
 
             <div class="midPane">
-                <div class="c5 leftGrid">
+                <div class="b5 leftGrid">
 
                     <div class="playerName">
                         .playerName
@@ -158,7 +152,7 @@
                     </div>
 
                 </div>
-                <div class="d5 rightGrid">
+                <div class="e5 rightGrid">
 
                     <div class="playerName">
                         .playerName
@@ -189,11 +183,51 @@
                 </div>
             </div>
             <div class="bottomPane">
+                <div class="leftFore">
+                    <div class="actionLogPanel">
+                        <b>Action Log</b>
+                        <div ID="actionLogWindow">
+                            Note: this text currently shows up at the bottom because of the way I have things scrolling
+                            off-screen. I will see if there's a better way later... (might need some code) </div>
+                        <div>
+                            <button class="btn-sand" id="LeaderboardBtn"
+                                style="height:28px; width: 100px; margin: 3px">Leaderboard</button>
+                        </div>
+                        <div>
+                            <button class="btn-sand" id="RulesBtn" style="height:28px; width: 100px">Rules</button>
+                        </div>
 
-            </div>
-            <div class="midPane">
+                    </div>
+                </div>
+                <div class="midFore">
 
+                </div>
+                <div class="rightFore">
+                    <div class="messagePanel">
+                        <b>Messages</b>
+                        <div ID="messageWindow">
+                            Note: this text currently shows up at the bottom because of the way I have things scrolling
+                            off-screen. I will see if there's a better way later... (might need some code)
+                        </div>
+                        <label style="padding-top:20px; margin-bottom:0px; padding-bottom:0px; color:black" for="msgInput"><b>Send a message</b></label>
+                        <div class="input-field inline" style="padding-top:0px; margin-top:0px">
+                            <input type="text" id="msgInput" > </div>
+                            <button class="btn-send right input-field" id="sendMsgBtn" style="padding-top:0px; margin-top:2px; margin-left:0px"><i
+                                class="material-icons tiny">send</i></button>
+                        <div>
+                            <div>
+                                <button class="btn-sand" id="quitBtn" style="height:28px; width: 100px; margin: 3px">Quit
+                                    game</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
+        </div>
+
+
+        </div>
 
         </div>
     </main>
