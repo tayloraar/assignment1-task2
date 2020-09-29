@@ -6,6 +6,21 @@
       <!DOCTYPE html>
   <html>
     <head>
+    <style>
+    .div2 {
+  width: 40%;
+  height: 100px;
+  border: 1px solid red;
+}
+    .chatbox {
+  width: 300px;
+  height: 100px;
+  display: flex; 
+  overflow:auto;
+  flex-direction: column-reverse;
+  border: 1px solid red;
+}
+    </style>
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
@@ -17,6 +32,17 @@
     <p id="text">
     </p>
     <p id="gamestatus"></p>
+     <div class="row">
+     <div>Chat Box</div>
+     <div class="chatbox" id="chatbox"></div>
+     <br/>
+     <textarea class="div2" id="textarea"></textarea>
+     <br/>
+     <a id="submitchat" class="waves-effect waves-light btn-large">Button</a>
+     </div>
+     
+
+
 
       <!--JavaScript at end of body for optimized loading-->
       <script src="/socket.io/socket.io.js"></script>
