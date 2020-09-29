@@ -9,6 +9,8 @@ let listdesuser=[]
 let checkuserexist=false
 let statusgame=""
 let socketofeachuser;
+let checksocketexist=false
+
 //Run node as a web server for hosting static files (html)
 app.use(express.static(__dirname+"/public"))
 
@@ -32,22 +34,35 @@ else if(deleteid!=1&&deleteid<5){
 // Function to check username is exist or not
 function checkexist(username,socketid){
   listdesuser.forEach((user) => {
-    if(user.name==username||user.socket==socketid){
+    if(user.name==username){
       checkuserexist=true
       return;
     }
   });
 }
-
+// Function to check username is exist or not
+function checksocketidexist(username,socketid){
+  listdesuser.forEach((user) => {
+    if(user.socket==socketid){
+      checksocketexist=true
+      return;
+    }
+  });
+}
 //Function to check validation of username input
 function checkvalidation(username,socketid,res){
   checkexist(username,socketid)
+  checksocketidexist(username,socketid)
   if(username==null){
     message="Error"
   }
   else if(checkuserexist==true){
-    message="This username is exist Or You already registered"
+    message="This username is exist"
     checkuserexist=false
+  }
+  else if(checksocketexist==true){
+    message="You already registered"
+    checksocketexist=false
   }
   else if(listdesuser.length>=5){
     message="There are five people in game room"
@@ -72,7 +87,7 @@ function checknumberofplayer(){
   const numberofuser=listdesuser.length
    // If array length =5 (enough players) => Game Status=Game start
     if(numberofuser==5){
-      statusgame="start game"
+      statusgame="START GAME"
       io.emit("statusgame",statusgame)
     }
     //If do not have enough player => Return the amount of waiting players.
@@ -143,9 +158,6 @@ io.on('connection', (socket) => {
       });
   })
   ;
-
-
-
 http.listen(3000, () => {
   console.log('listening on *:3000');
 });

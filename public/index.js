@@ -1,8 +1,8 @@
 let socketid;
 let statusregis;
-let username;
+let nameplayer;
 let socket=io.connect('http://localhost:3000');
-//Event call when user load page
+
 $.get('/desuser', function(res){
   $('#waiting').text(res)
 });
@@ -12,10 +12,11 @@ $.get('/socketid', function(res){
 getdescriptionofuser()
 getstatusgame()
 updatechatbox () 
+
 //Join Game button
   $(document).ready(function(){
     $("#joinGameBtn").click(function(){
-      username=$('#joinName').val()
+      let username=$('#joinName').val()
       if(username!=""){
       const user={
         user:username,
@@ -23,6 +24,9 @@ updatechatbox ()
       }
       $.get('/submitname',user, function (responsedata) {
         alert(responsedata)
+        if(responsedata=="Successful"){
+        nameplayer=user.user
+      }
         statusregis=responsedata     
       })
       $('#joinName').val("")
@@ -34,17 +38,20 @@ updatechatbox ()
   });
 
 
+
 //Send message to chat box
   $(document).ready(function(){
     $("#sendMsgBtn").click(function(){
      const text=$('#msgInput').val()
-     if(text!=""&&statusregis=="Successful"){
+     if(text!=""&&(statusregis=="Successful"||statusregis=="You already registered")){
       const data={
-        name:username,
+        name:nameplayer,
         descriptiontext:text
       }
+
       $.get('/chatbox',data, function (responsedata) {   
       })
+
       $('#msgInput').val("")
      }
      else if(text=="") {
@@ -66,8 +73,7 @@ updatechatbox ()
   //Update message chat on chat box
   function updatechatbox(){
     socket.on('updatechatbox', data => {
-    $('#messageWindow').append(data.name+": "+data.description)
-    $('#messageWindow').append("<br />")
+    $('#messageWindow').append("player ",data.name,":",data.description,"<br/>")
   });
 }
 //Get information of players and push to screen
@@ -85,7 +91,7 @@ updatechatbox ()
      $('#player5').empty()
      const mydata= JSON.parse(listdata)       
      mydata.forEach((data) => {
-      let player="#player"+data.id
+      const player="#player"+data.id
       $(player).append("Player "+data.id+": "+data.name)
     });
 
