@@ -1,110 +1,150 @@
-const e = require('express');
 const express = require('express')
 const moment=require('moment')
 const app = express()
 const port = 3000
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
-var count=0
-var listdesuser=[]
-var checkuserexist=false
-var statusgame;
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+let count=0
+let listdesuser=[]
+let checkuserexist=false
+let statusgame=""
+let socketofeachuser;
+//Run node as a web server for hosting static files (html)
+app.use(express.static(__dirname+"/public"))
 
 //Function to update user id (position) after one user go out the game room
 function  order_user(deleteid)
 {
 if(deleteid==1){
-  for (var i=0;i<listdesuser.length;i++){
-    listdesuser[i].id=i+1
-  }
+  listdesuser.forEach((user) => { 
+    user.id--
+  });
 }
 else if(deleteid!=1&&deleteid<5){
-  for (var i=0;i<listdesuser.length;i++){
-    if(listdesuser[i].id>deleteid){
-      listdesuser[i].id=listdesuser[i].id-1
-    }
-  }
+  listdesuser.forEach((user) => { 
+    if(user.id>deleteid){
+      user.id--
+    }    
+  });
 }
-}
-// Function to check username is exist or not
-function checkexist(username){
-  for (var i=0;i<listdesuser.length;i++){
-    if(listdesuser[i].name==username){
-      checkuserexist=true
-      break;
-    }
-  }
 }
 
-io.on('connection', (socket) => {
-    var name = "";
-    // Server get username from client
-    socket.on('username', function(data) {
-    name=data
-    let  username = data;
-    checkexist(username)
-    if(checkuserexist==false && listdesuser.length<5){ 
-    // If username is not exist and game is not started => Allow client to redirect to playing page  
-    var destination = '/playing.html';
-    socket.emit('redirect', destination);
+// Function to check username is exist or not
+function checkexist(username,socketid){
+  listdesuser.forEach((user) => {
+    if(user.name==username||user.socket==socketid){
+      checkuserexist=true
+      return;
     }
-    else if(checkuserexist==true){
-      socket.emit("userexisterror","This username is exist")
-    }
-    else if(listdesuser.length>=5){
-      socket.emit("userexisterror","There are five people in game room")
-    }
+  });
+}
+
+//Function to check validation of username input
+function checkvalidation(username,socketid,res){
+  checkexist(username,socketid)
+  if(username==null){
+    message="Error"
+  }
+  else if(checkuserexist==true){
+    message="This username is exist Or You already registered"
     checkuserexist=false
-    });
-    
-    socket.on('getdata', function(data) {
-    //When user go into the playing page. Add user information into array and emit to all users about the array information.
-    count=count+1
-    let  userinfo = { id: count ,name: data, socket:socket.id};
-    listdesuser.push(userinfo)
-    io.emit("descriptionuser",JSON.stringify(listdesuser))
-    // If array length =5 (enough players) => Game Status=Game start
-    if(listdesuser.length==5){
-    statusgame="game start"
-    io.emit("statusgame",statusgame)
+  }
+  else if(listdesuser.length>=5){
+    message="There are five people in game room"
+  }
+  else{
+    message="Successful"
+}
+return message
+}
+
+//Function to push user information to list
+function pushdatatolist(username,socketid){
+count++
+let  userinfo = { id: count ,name: username, socket:socketid};
+listdesuser.push(userinfo)
+io.emit("descriptionuser",JSON.stringify(listdesuser))
+io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
+}
+
+//Function to count the number players
+function checknumberofplayer(){
+  const numberofuser=listdesuser.length
+   // If array length =5 (enough players) => Game Status=Game start
+    if(numberofuser==5){
+      statusgame="start game"
+      io.emit("statusgame",statusgame)
     }
     //If do not have enough player => Return the amount of waiting players.
     else{
-    io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
+    statusgame="Wating for more " +(5-listdesuser.length)+ " People"
+    io.emit("statusgame",statusgame) 
     }   
-     });
- 
-    //Get text message from client and send to it to all clients
-    socket.on('sendtextchat', function(data) {
-       io.emit("updatechatbox",data)
-       });
-   
+}
 
-
-    socket.on('disconnect', (reason) => {
-    //When one user disconnect => Update array information and emit to all user about updated array information
-    for (var i=0;i<listdesuser.length;i++){
-      if(listdesuser[i].socket==socket.id){
-        var deleteid=listdesuser[i].id
-        listdesuser.splice(i,1)
-        count=count-1
-        if(listdesuser.length>0){
-        order_user(parseInt(deleteid))
-        }
-        io.emit("descriptionuser",JSON.stringify(listdesuser)) 
-        break;
-      }
+//Function when one user out game
+function userdisconnection(socketidout){
+  listdesuser.forEach((user) => {
+    if(user.socket==socketidout){
+     let lengtharrayuser=listdesuser.length
+     let deleteid=user.id
+     listdesuser.splice((user.id-1),1)
+     count--
+     if(lengtharrayuser>0){
+      order_user(parseInt(deleteid))
+     }
+     io.emit("descriptionuser",JSON.stringify(listdesuser)) 
     }
+    return;
+  });
     // Update the amount of waiting players
-    if(statusgame==null){
+    if(statusgame!="start game"){
     io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
-    }   
+    }  
+}
+app.get('/submitname', function(req, res) {
+const username=req.query.user
+const socketid=req.query.socket
+message=checkvalidation(username,socketid,res)
+res.send(message)
+if(message=="Successful"){
+pushdatatolist(username,socketid)
+}
+checknumberofplayer()
+});
+
+app.get('/desuser', function(req, res){
+  res.send("Wating for more " +(5-listdesuser.length)+ " People")
+  io.emit("descriptionuser",JSON.stringify(listdesuser)) 
+});
+
+app.get('/status', function(req, res){
+  io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People")   
+});
+app.get('/socketid', function(req, res){
+  res.send(socketofeachuser)
+});
+
+app.get('/chatbox', function(req, res){
+    const name=req.query.name
+    const description=req.query.descriptiontext
+    const data={
+      name:name,
+      description:description
+    }
+    io.emit("updatechatbox",data)
+  });
+
+
+io.on('connection', (socket) => {
+    socketofeachuser=socket.id
+    socket.on('disconnect', (reason) => {
+      userdisconnection(socket.id)
       });
   })
   ;
 
-//Run node as a web server for hosting static files (html)
-app.use(express.static(__dirname+"/"))
+
 
 http.listen(3000, () => {
   console.log('listening on *:3000');
