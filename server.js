@@ -147,6 +147,7 @@ app.get('/chatbox', function(req, res){
       name:name,
       description:description
     }
+    res.send("OK")
     io.emit("updatechatbox",data)
   });
 
