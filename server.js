@@ -145,17 +145,35 @@ app.get('/chatbox', function(req, res){
     const description=req.query.descriptiontext
     const data={
       name:name,
-      description:description
+      description:description,
+      action:'purple monkey dishwasher'
     }
-    res.send("OK")
-    io.emit("updatechatbox",data)
+   io.emit("updatechatbox",data) 
+   res.send("OK") 
   });
 
+app.get('/actionLog', function(req, res){
+    const name=req.query.name
+   const action = req.query.action
+    const data={
+      name:name,
+      action:action
+    }
+    io.emit("updateactionlog",data)
+    res.send("action log hit")
+    });
 
 io.on('connection', (socket) => {
     socketofeachuser=socket.id
     socket.on('disconnect', (reason) => {
+      const name=req.query.name
+      const data ={
+        name:name,
+        action: " disconnected"
+      }
+
       userdisconnection(socket.id)
+      io.emit("updateactionlog",data) 
       });
   })
   ;
