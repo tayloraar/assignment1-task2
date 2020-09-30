@@ -38,12 +38,12 @@
 
 
             <div class="gameRoom">
-                <div id="player1">[player 1 name] </div>
-                <div id="player2">[player 2 name] </div>
-                <div id="player3">[player 3 name] </div>
+                <div id="player1"> </div>
+                <div id="player2"> </div>
+                <div id="player3"> </div>
                 <div id="player4"></div>
                 <div id="player5"></div>
-                <div id="waiting">Waiting for 2 more players... </div>
+                <div id="waiting"> </div>
 
             </div>
             <div class="welcomeJoinGame">
@@ -186,9 +186,7 @@
                 <div class="leftFore">
                     <div class="actionLogPanel">
                         <b>Action Log</b>
-                        <div ID="actionLogWindow">
-                            Note: this text currently shows up at the bottom because of the way I have things scrolling
-                            off-screen. I will see if there's a better way later... (might need some code) </div>
+                        <div ID="actionLogWindow"></div>
                         <div>
                             <button class="btn-sand" id="LeaderboardBtn"
                                 style="height:28px; width: 100px; margin: 3px">Leaderboard</button>
@@ -206,8 +204,7 @@
                     <div class="messagePanel">
                         <b>Messages</b>
                         <div ID="messageWindow">
-                            Note: this text currently shows up at the bottom because of the way I have things scrolling
-                            off-screen. I will see if there's a better way later... (might need some code)
+
                         </div>
                         <label style="padding-top:20px; margin-bottom:0px; padding-bottom:0px; color:black" for="msgInput"><b>Send a message</b></label>
                         <div class="input-field inline" style="padding-top:0px; margin-top:0px">
@@ -233,15 +230,14 @@
     </main>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
-    <script src="env.js"></script>
+    <script src="index.js"></script>
 
 </body>
 
