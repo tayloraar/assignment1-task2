@@ -1,11 +1,13 @@
 
-$(document).ready(function () {
-    displayGameBoard();
-    let data = {
-      'handSize': 8,
-      'opponentPlayerNum': 2,
-      'thisPlayerNum': 1
-    }
-   displayHandSize(data);
-  })
+const display = require('../services/displayServices')
+
+const displayGameBoard=(payload, res)=>
+{
+    display.displayGameBoard(payload, res)
+}
+
+module.exports = {
+    displayGameBoard
+}
+
   

@@ -1,7 +1,7 @@
 {
   "name": "assessment3_team1",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "public/index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,5 +15,14 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {},
-  "description": ""
+  "description": "Create Registration function => When user input username ( not exist in game room) => Redirect to playing game=> Assign ID (Position) for this player </br>  If one person go out the playing game page => Update the position for all remain users</br>  Check validation for user input in registration</br>  Update the amount of waiting players</br>  If have enough 5 players=> Game Status= Game Start</br>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://kats8@github.com/https-github-com-vuongtan/Team1-BangGame.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/https-github-com-vuongtan/Team1-BangGame/issues"
+  },
+  "homepage": "https://github.com/https-github-com-vuongtan/Team1-BangGame#readme"
 }

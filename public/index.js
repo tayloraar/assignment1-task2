@@ -1,3 +1,4 @@
+const display = require('./displayServices');
 
 let socketid;
 let statusregis;
@@ -13,6 +14,7 @@ window.onload = function (e) {
   getdescriptionofuser()
   getstatusgame()
   updatechatbox()
+  display.displayGameBoard()
 }
 
 

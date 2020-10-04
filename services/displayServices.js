@@ -1,11 +1,10 @@
 
 
 //hides the join screen and displays the gameboard
-const displayGameBoard = () => {
+const displayGameBoard = (req, res) => {
  $("#gameboard").removeClass("hidden");
   $("#welcomeScreen").addClass("hidden");
-
- // res.send({ result: 200 })
+ res.send({ result: 200 })
 }
 
 //hides the gameboard & shows the join screen
@@ -69,25 +68,12 @@ const displayHandSize = (payload) => {
   }
 }
 
-/*
-$(document).ready(function () {
-  displayGameBoard();
-  let data = {
-    'handSize': 8,
-    'opponentPlayerNum': 2,
-    'thisPlayerNum': 1
-  }
- displayHandSize(data);
-})
-*/
 
-/*
 module.exports = {
   displayHandSize,
   displayGameBoard,
   displayWelcomeScreen
 }
-*/
 
 
 /*
@@ -96,16 +82,4 @@ const display = require('../services/displayServices')
 then:
 display.displayGameBoard, etc, in code
 
-eg.
-
-
-$(document).ready(function () {
-    display.displayGameBoard();
-    data {
-      "handSize":5,
-      "opponentPlayerNum":2,
-      "thisPlayerNum": 1
-    }
-    display.displayHandSize(data, res);
-})
 */
