@@ -1,6 +1,3 @@
-import { createRequire } from 'module'
-const require = createRequire(import.meta.url);
-let __dirname = process.cwd();
 
 const express = require('express')
 const moment=require('moment')
