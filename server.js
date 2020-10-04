@@ -4,6 +4,8 @@ const app = express()
 const port = 3000
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+const { MongoClient } = require("mongodb");
+const mongoose = require('mongoose');
 let count=0
 let listdesuser=[]
 let checkuserexist=false
@@ -188,6 +190,145 @@ io.on('connection', (socket) => {
       });
   })
   ;
+  function insertion(){
+    // Replace the following with your Atlas connection string                                                                                                                                        
+  const url = "mongodb+srv://eGTB4yl0HFJQ6lzD:eGTB4yl0HFJQ6lzD@project.wdfid.mongodb.net/Project?retryWrites=true&w=majority";
+  const client = new MongoClient(url);
+  
+  async function run() {
+      try {
+          await client.connect();
+          console.log("Connected correctly to server");
+          const db = client.db("project");
+  
+           
+           var col = db.collection("login");
+           var myobj = { username: "voungtan", address: "Highway 37" };
+           await col.insertOne(myobj);
+  
+           col = db.collection("viewuserscoredata");
+           myobj = { user_name: "voungtan", Score: 37000 ,Round:1,Datetime:"04/30/2020 13:01:01"};
+           await col.insertOne(myobj);
+           col = db.collection("historytabledata");
+           myobj = { user_name: "voungtan", Score: 37000 ,Round:1,Datetime:"04/30/2020 13:01:01"};
+           await col.insertOne(myobj);
+  
+           col = db.collection("startinggamedata");
+           myobj = { user_name: "voungtan", Total_players: 5,Character_Cards:16,Role_Cards:7,Playing_Cards:80,Character_Card_Name:"Bart Cassidy" ,Character_Card_Feature_Description:"This is a card",Character_Bullets:4,Role_Card_Name:"Sheriff"
+           ,Role_Card_Feature_Description:"This is Description",Playing_Card_Name:"Playing_Card_Name",Color_Playing_Card :"Blue",Character_Card_Images:"",Role_Card_Images:"",Playing_Card_Images:""};
+           await col.insertOne(myobj);
+           col = db.collection("Displaygameinterface");
+           myobj = { user_name: "voungtan", User_character_card_Images: "",User_Role_Card_Images:"",User_Playing_card_Images:"",Current_Bullets:"",Table_Card_Images:"" };
+           await col.insertOne(myobj);
+           col = db.collection("Randomlygiveonecharactercard");
+           myobj = { user_name: "voungtan", Character_Cards: "Highway 37",Character_Card_Name:"" };
+           await col.insertOne(myobj);
+           col = db.collection("Applylimitedtimeplayerturn");
+           myobj = { user_name: "voungtan", Current_time: "Highway 37",Limited_time:"" };
+           await col.insertOne(myobj);
+           col = db.collection("Applyfeatureofcharactercard");
+           myobj = { user_name: "voungtan", Character_Card_Name: "Highway 37",CharacterCard_Feature_Description:"" };
+           await col.insertOne(myobj);
+           col = db.collection("Applyfeatureofrolecard");
+           myobj = { user_name: "voungtan", Role_Card_name: "Highway 37",Role_Card_Feature_Description:"" };
+           await col.insertOne(myobj);
+           col = db.collection("Applyplayersorder");
+           myobj = { user_name: "voungtan", User_Order: 4};
+           await col.insertOne(myobj);
+           col = db.collection("Applycurrentdistance");
+           myobj = { user_name: "voungtan", Distance_user_to_opponents: 4,Distance_opponents_to_user:2};
+           await col.insertOne(myobj);
+           col = db.collection("Drawingcards");
+           myobj = { user_name: "voungtan", Current_user_cards: "tst",Updated_user_cards:"order",Current_user_card_images:"",Updated_user_card_images:""};
+           await col.insertOne(myobj);
+           col = db.collection("Usercanplayspecificcards");
+           myobj = { user_name: "voungtan", Current_user_cards: "tst",Updated_user_cards:"order",Current_user_card_images:"",Updated_user_card_images:""};
+           await col.insertOne(myobj);
+           col = db.collection("Rewardfunction");
+           myobj = { user_name: "voungtan", Current_user_cards: "tst",Updated_user_cards:"order",Current_user_card_images:"",Updated_user_card_images:""};
+           await col.insertOne(myobj);
+           col = db.collection("Bangfunction");
+           myobj = { user_name: "voungtan", Target_name: "tst",Playing_Card_Name:"order",Updated_Bullets:"",Current_Bullets:""};
+           await col.insertOne(myobj);
+           col = db.collection("Missedfunction");
+           myobj = { user_name: "voungtan", Target_name: "tst",Playing_Card_Name:"order"};
+           await col.insertOne(myobj);
+           col = db.collection("ncreaseandDecreaseDistance");
+           myobj = { user_name: "voungtan", Target_name: "tst",increaseorDecrease_Distance_user_opponents:"order",IncreaseorDecreaseDistance_opponents_user:"",
+           Distance_user_to_opponents:"Distance_user_to_opponents",Distance_opponents_to_user:'Distance_opponents_to_user'};
+           await col.insertOne(myobj);
+           col = db.collection("changingweapon");
+           myobj = { user_name: "voungtan", Current_Weapon: "tst",Distance_current_weapon:"order",Updated_Weapon:"",Distance_updated_weapon:""}
+           await col.insertOne(myobj);
+         
+           col = db.collection("DrawFunction");
+           myobj = { user_name: "voungtan", Playing_Card_Name: "tst",Used_Compared_Card:"order",Updated_user_cards:""}
+           await col.insertOne(myobj);
+           col = db.collection("Drawoneplayerscard");
+           myobj = { user_name: "voungtan", Target_name: "tst",Playing_Card_Name:"order",Updated_user_cards:""}
+           await col.insertOne(myobj);
+           col = db.collection("Discardingcardfromanotherperson");
+           myobj = { user_name: "voungtan", Target_name: "tst",Playing_Card_Name:"order",Updated_user_cards:""}
+           await col.insertOne(myobj);
+           col = db.collection("Discardingcardfromgame");
+           myobj = { user_name: "voungtan", Playing_Card_Name: "tst",Updated_Table_Card :"order"}
+           await col.insertOne(myobj);
+           col = db.collection("Jailfunction");
+           myobj = { user_name: "voungtan", Targetname : "tst",Playing_Card_Name :"order"}
+           await col.insertOne(myobj);
+           col = db.collection("Gunbattle");
+           myobj = { user_name: "voungtan", Targetname : "tst",Playing_Card_Name :"order",Current_Bullets:3,Updated_Bullets:2}
+           await col.insertOne(myobj);
+           col = db.collection("Storeusersscore");
+           myobj = { user_name: "voungtan", Rank : 1,Round :1}
+           await col.insertOne(myobj);
+           col = db.collection("Displaywinningplayer");
+           myobj = { user_name: "voungtan", Rank : 1,Round :1}
+           await col.insertOne(myobj);
+           col = db.collection("Disconnection");
+           myobj = { user_name: "voungtan", Rank : 1,Round :1,User_Order:4}
+           await col.insertOne(myobj);
+  
+  
+  
+           console.log("Inserted");
+  
+  
+  
+  
+      } catch (err) {
+          console.log(err.stack);
+      }
+      finally {
+          await client.close();
+      }
+  }
+  run().catch(console.dir);
+  }
+  function connection(){
+    // Replace the following with your Atlas connection string                                                                                                                                        
+  const url = "mongodb+srv://eGTB4yl0HFJQ6lzD:eGTB4yl0HFJQ6lzD@project.wdfid.mongodb.net/Project?retryWrites=true&w=majority";
+  const client = new MongoClient(url);
+  
+  async function run() {
+      try {
+          await client.connect();
+          console.log("Connected correctly to server");
+           
+  
+  
+      } catch (err) {
+          console.log(err.stack);
+      }
+      finally {
+          await client.close();
+      }
+  }
+  
+  run().catch(console.dir);
+  }
 http.listen(3000, () => {
+  connection();
+  insertion(); //insertion now
   console.log('listening on *:3000');
 });

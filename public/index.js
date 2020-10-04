@@ -128,7 +128,3 @@ window.onload = function(e){
     });
 
   }
-
-
-  
-  
