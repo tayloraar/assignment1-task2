@@ -125,6 +125,7 @@ window.onload = function(e){
      $('#player5').empty()
      const mydata= JSON.parse(listdata)       
      mydata.forEach((data) => {
+      console.log(data.id)
       const player="#player"+data.id
       $(player).append("Player "+data.id+": "+data.name)
     });

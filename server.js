@@ -12,10 +12,10 @@ let checkuserexist=false
 let statusgame=""
 let socketofeachuser;
 let checksocketexist=false
-var playerData=[]
+let playerData=[]
 
 
-const player = {
+let player = {
   name: "name",
   socket: "empty",
   id: "empty",
@@ -42,12 +42,12 @@ app.use(express.static(__dirname+"/public"))
 function  order_user(deleteid)
 {
 if(deleteid==1){
-  listdesuser.forEach((user) => { 
+  playerData.forEach((user) => { 
     user.id--
   });
 }
 else if(deleteid!=1&&deleteid<5){
-  listdesuser.forEach((user) => { 
+  playerData.forEach((user) => { 
     if(user.id>deleteid){
       user.id--
     }    
@@ -57,7 +57,7 @@ else if(deleteid!=1&&deleteid<5){
 
 // Function to check username is exist or not
 function checkexist(username,socketid){
-  listdesuser.forEach((user) => {
+  playerData.forEach((user) => {
     if(user.name==username){
       checkuserexist=true
       return;
@@ -66,7 +66,7 @@ function checkexist(username,socketid){
 }
 // Function to check username is exist or not
 function checksocketidexist(username,socketid){
-  listdesuser.forEach((user) => {
+  playerData.forEach((user) => {
     if(user.socket==socketid){
       checksocketexist=true
       return;
@@ -88,7 +88,7 @@ function checkvalidation(username,socketid,res){
     message="You already registered"
     checksocketexist=false
   }
-  else if(listdesuser.length>=5){
+  else if(playerData.length>=5){
     message="There are five people in game room"
   }
   else{
@@ -100,22 +100,33 @@ return message
 //Function to push user information to list
 function pushdatatolist(username,socketid){
 count++
-let  userinfo = { id: count ,name: username, socket:socketid};
-let newPlayer = player;
-newPlayer.id = count;
-newPlayer.name = username;
-newPlayer.socket = socketid;
-console.log(JSON.stringify(newPlayer));
+let newPlayer =  {
+  name: username,
+  socket: socketid,
+  id: count,
+  role: "role",
+  character: "character",
+  position: count,
+  maxLife: "maxLife",
+  currentLife: "currentLife",
+  weapon: "weapon",
+  scope: false,
+  mustang: false,
+  barrel: false,
+  jail: false,
+  dynamite: false,
+  hand: [
+      {"id": 1, "name": 'empty', }
+  ],
+}
 playerData.push(newPlayer);
-listdesuser.push(userinfo);
-
-io.emit("descriptionuser",JSON.stringify(listdesuser))
-io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
+io.emit("descriptionuser",JSON.stringify(playerData))
+io.emit("statusgame","Wating for more " +(5-playerData.length)+ " People") 
 }
 
 //Function to count the number players
 function checknumberofplayer(){
-  const numberofuser=listdesuser.length
+  const numberofuser=playerData.length
    // If array length =5 (enough players) => Game Status=Game start
     if(numberofuser==5){
       statusgame="START GAME"
@@ -123,13 +134,13 @@ function checknumberofplayer(){
     }
     //If do not have enough player => Return the amount of waiting players.
     else{
-    statusgame="Wating for more " +(5-listdesuser.length)+ " People"
+    statusgame="Wating for more " +(5-playerData.length)+ " People"
     io.emit("statusgame",statusgame) 
     }   
 }
 function checkuserdisconnect(socketid){
   let username
-  listdesuser.forEach((user) => { 
+  playerData.forEach((user) => { 
     if(user.socket==socketid){
        username=user.name
       return
@@ -141,22 +152,23 @@ function checkuserdisconnect(socketid){
 
 //Function when one user out game
 function userdisconnection(socketidout){
-  listdesuser.forEach((user) => {
+  playerData.forEach((user) => {
     if(user.socket==socketidout){
-     let lengtharrayuser=listdesuser.length
+      console.log(socketidout)
+     let lengtharrayuser=playerData.length
      let deleteid=user.id
-     listdesuser.splice((user.id-1),1)
+     playerData.splice((user.id-1),1)
      count--
      if(lengtharrayuser>0){
       order_user(parseInt(deleteid))
      }
-     io.emit("descriptionuser",JSON.stringify(listdesuser)) 
+     io.emit("descriptionuser",JSON.stringify(playerData)) 
     }
     return;
   });
     // Update the amount of waiting players
     if(statusgame!="start game"){
-    io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
+    io.emit("statusgame","Wating for more " +(5-playerData.length)+ " People") 
     }  
 }
 app.get('/submitname', function(req, res) {
@@ -171,12 +183,12 @@ checknumberofplayer()
 });
 
 app.get('/desuser', function(req, res){
-  res.send("Wating for more " +(5-listdesuser.length)+ " People")
-  io.emit("descriptionuser",JSON.stringify(listdesuser)) 
+  res.send("Wating for more " +(5-playerData.length)+ " People")
+  io.emit("descriptionuser",JSON.stringify(playerData)) 
 });
 
 app.get('/status', function(req, res){
-  io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People")   
+  io.emit("statusgame","Wating for more " +(5-playerData.length)+ " People")   
 });
 app.get('/socketid', function(req, res){
   res.send(socketofeachuser)
