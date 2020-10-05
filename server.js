@@ -12,6 +12,28 @@ let checkuserexist=false
 let statusgame=""
 let socketofeachuser;
 let checksocketexist=false
+var playerData=[]
+
+
+const player = {
+  name: "name",
+  socket: "empty",
+  id: "empty",
+  role: "role",
+  character: "character",
+  position: "position",
+  maxLife: "maxLife",
+  currentLife: "currentLife",
+  weapon: "weapon",
+  scope: false,
+  mustang: false,
+  barrel: false,
+  jail: false,
+  dynamite: false,
+  hand: [
+      {"id": 1, "name": 'empty', }
+  ],
+}
 
 //Run node as a web server for hosting static files (html)
 app.use(express.static(__dirname+"/public"))
@@ -79,7 +101,14 @@ return message
 function pushdatatolist(username,socketid){
 count++
 let  userinfo = { id: count ,name: username, socket:socketid};
-listdesuser.push(userinfo)
+let newPlayer = player;
+newPlayer.id = count;
+newPlayer.name = username;
+newPlayer.socketid;
+console.log(JSON.stringify(newPlayer));
+playerData.push(newPlayer);
+listdesuser.push(userinfo);
+
 io.emit("descriptionuser",JSON.stringify(listdesuser))
 io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
 }
@@ -130,6 +159,7 @@ function userdisconnection(socketidout){
     io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
     }  
 }
+
 app.get('/submitname', function(req, res) {
 const username=req.query.user
 const socketid=req.query.socket
@@ -149,6 +179,7 @@ app.get('/desuser', function(req, res){
 app.get('/status', function(req, res){
   io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People")   
 });
+
 app.get('/socketid', function(req, res){
   res.send(socketofeachuser)
 });
@@ -166,8 +197,8 @@ app.get('/chatbox', function(req, res){
   });
 
 app.get('/actionLog', function(req, res){
-    const name=req.query.name
-   const action = req.query.action
+    const name = req.query.name
+    const action = req.query.action
     const data={
       name:name,
       action:action
@@ -176,20 +207,31 @@ app.get('/actionLog', function(req, res){
     res.send("action log hit")
     });
 
+app.get('/newUser', function(data){
+    const name = data.name
+    const socketid = data.socket
+ 
+})
+
 io.on('connection', (socket) => {
     socketofeachuser=socket.id
     socket.on('disconnect', (reason) => {
-    const name=checkuserdisconnect(socket.id)
       const data ={
-        name:name,
+        name:"user",
         action: " disconnected"
       }
 
       userdisconnection(socket.id)
       io.emit("updateactionlog",data) 
       });
-  })
-  ;
+  });
+
+
+
+
+
+
+
   function insertion(){
     // Replace the following with your Atlas connection string                                                                                                                                        
   const url = "mongodb+srv://eGTB4yl0HFJQ6lzD:eGTB4yl0HFJQ6lzD@project.wdfid.mongodb.net/Project?retryWrites=true&w=majority";

@@ -4,6 +4,7 @@ let nameplayer;
 let role;
 let action;
 let socket=io.connect('http://localhost:3000');
+
 window.onload = function(e){ 
   $.get('/desuser', function(res){
     $('#waiting').text(res)
@@ -27,7 +28,6 @@ window.onload = function(e){
       const user={
         user:username,
         socket:socketid,
-        role: role,
         }
       $.get('/submitname',user, function (responsedata) {
         alert(responsedata)
@@ -36,9 +36,12 @@ window.onload = function(e){
 
           let data = {
             name: username,
-            action: action
+            action: action,
+            socket: socketid
           }
+          
         $.get('/actionLog',data)
+        $.get('/newUser', data)
       }
         statusregis=responsedata     
       })
