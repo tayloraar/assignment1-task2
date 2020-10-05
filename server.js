@@ -328,7 +328,18 @@ io.on('connection', (socket) => {
            col = db.collection("Disconnection");
            myobj = { user_name: "voungtan", Rank : 1,Round :1,User_Order:4}
            await col.insertOne(myobj);
-  
+           col = db.collection("HistoryRecord");
+           myobj = { RecordID: 1, Username : "Abo",Rank :1,Round:4}
+           await col.insertOne(myobj);
+           col = db.collection("PlayingCard");
+           myobj = { PlayingCardID: 1, PlayingCardID :"ACE",PlayingCardDescription :"hbchj",PlayingCardImages:"101124"}
+           await col.insertOne(myobj);
+           col = db.collection("RoleCard");
+           myobj = { RoleCardID: 1, RoleCardName :"ACE",RoleCardDescription :"hbchj",RoleCardImages:"101124"}
+           await col.insertOne(myobj);
+           col = db.collection("CharacterCard");
+           myobj = { CharacterCardID: 1, CharacterCardName :"ACE",CharacterCardDescription :"hbchj",CharacterCardImages:"101124"}
+           await col.insertOne(myobj);
   
   
            console.log("Inserted");
