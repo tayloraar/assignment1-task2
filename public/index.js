@@ -4,7 +4,6 @@ let nameplayer;
 let role;
 let action;
 let socket=io.connect('http://localhost:3000');
-
 window.onload = function(e){ 
   $.get('/desuser', function(res){
     $('#waiting').text(res)

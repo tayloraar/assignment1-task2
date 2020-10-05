@@ -159,7 +159,6 @@ function userdisconnection(socketidout){
     io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
     }  
 }
-
 app.get('/submitname', function(req, res) {
 const username=req.query.user
 const socketid=req.query.socket
@@ -179,7 +178,6 @@ app.get('/desuser', function(req, res){
 app.get('/status', function(req, res){
   io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People")   
 });
-
 app.get('/socketid', function(req, res){
   res.send(socketofeachuser)
 });
