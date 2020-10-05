@@ -104,7 +104,7 @@ let  userinfo = { id: count ,name: username, socket:socketid};
 let newPlayer = player;
 newPlayer.id = count;
 newPlayer.name = username;
-newPlayer.socketid;
+newPlayer.socket = socketid;
 console.log(JSON.stringify(newPlayer));
 playerData.push(newPlayer);
 listdesuser.push(userinfo);

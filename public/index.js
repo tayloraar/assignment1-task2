@@ -27,7 +27,6 @@ window.onload = function(e){
       const user={
         user:username,
         socket:socketid,
-        role: role,
         }
       $.get('/submitname',user, function (responsedata) {
         alert(responsedata)
@@ -36,9 +35,12 @@ window.onload = function(e){
 
           let data = {
             name: username,
-            action: action
+            action: action,
+            socket: socketid
           }
+          
         $.get('/actionLog',data)
+        $.get('/newUser', data)
       }
         statusregis=responsedata     
       })
