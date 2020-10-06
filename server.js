@@ -352,11 +352,6 @@ io.on('connection', (socket) => {
   });
 
 
-
-
-
-
-
   function insertion(){
     // Replace the following with your Atlas connection string                                                                                                                                        
   const url = "mongodb+srv://eGTB4yl0HFJQ6lzD:eGTB4yl0HFJQ6lzD@project.wdfid.mongodb.net/Project?retryWrites=true&w=majority";

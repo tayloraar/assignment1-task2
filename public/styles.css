@@ -357,7 +357,16 @@ width: 150px;
 height: 245px;
 margin: 2px;
 }
-
+.messagePanelforphase
+{
+  background-color: rgb(190, 177, 160);
+  text-align: center;
+column-span: 1;
+border-radius:5px;
+width: 150px;
+height: 245px;
+margin: 122px;
+}
 #messageWindow
 {
 font-size:0.7em;
