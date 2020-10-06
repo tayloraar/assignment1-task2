@@ -35,8 +35,6 @@
             <div id="gameRoomTitle">Current gameroom
             </div>
 
-
-
             <div class="gameRoom">
                 <div id="player1"> </div>
                 <div id="player2"> </div>
@@ -52,29 +50,32 @@
                     <input type="text" id="joinName"> </div>
                 <button class="btn-orange" id="joinGameBtn" style="margin-left: 10px">Join game</button>
             </div>
-
         </div>
 
         <div id="gameboard" class="">
             <div class="topPane">
-                <div class="c5 leftGrid">
-
+                <div id="c5" class="leftGrid">
                     <div class="playerName">
                         .playerName
                     </div>
-
-
                     <div class="bulletTray">
-                        .bulletTray
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
                     </div>
                     <div class="privateHand">
-                        .privateHand
+                        <img src="assets/cardBack.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
                     </div>
                     <div class="characterCard">
-                        .characterCard
+                        <img id="topleft"  alt="description" class="responsive cardOnly">
                     </div>
                     <div class="cardsInPlay">
-                        .cardsInPlay
+                        <img src="assets/cards/volcanic.png" alt="description" class="responsive cardOnly">
+                        <img src="assets/cards/winchester.png" alt="description" class="responsive cardOnly">
+
                     </div>
                 </div>
                 <div class="topMiddleGrid">
@@ -83,28 +84,33 @@
                         <img src="assets/invertedOutlaw.png" alt="" class="responsive">
                         <img src="assets/invertedRenegade.png" alt="" class="responsive">
                         <img src="assets/invertedDeputy.png" alt="" class="responsive">
-
                     </div>
                 </div>
-                <div class="d5 rightGrid">
+                <div id="d5" class="rightGrid">
 
                     <div class="playerName">
                         .playerName
                     </div>
 
                     <div class="cardsInPlay">
-                        <div>.cardsInPlay</div>
+                        <img src="assets/cards/mustang.png" alt="description" class="responsive cardOnly">
+                        <img src="assets/cards/winchester.png" alt="description" class="responsive cardOnly">
                     </div>
                     <div class="characterCard">
-                        .characterCard
+                        <img id="topright"  alt="Black Jack description"
+                            class="responsive cardOnly">
 
                     </div>
                     <div class="bulletTray">
-                        .bulletTray
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
                     </div>
                     <div class="privateHand">
-                        .privateHand
-
+                        <img src="assets/cardBack.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
                     </div>
 
 
@@ -113,7 +119,7 @@
 
 
             <div class="midPane">
-                <div class="b5 leftGrid">
+                <div id="b5" class="b5 leftGrid">
 
                     <div class="playerName">
                         .playerName
@@ -121,14 +127,17 @@
 
 
                     <div class="bulletTray">
-                        .bulletTray
-                    </div>
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive"> </div>
                     <div class="privateHand">
-                        .privateHand
-                    </div>
+                        <img src="assets/cardBack.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive"> </div>
                     <div class="characterCard">
                         <!--.characterCard-->
-                        <img src="assets/cards/Black Jack.png" alt="Black Jack description" class="responsive">
+                        <img id="midleft"  alt="Black Jack description" class="responsive">
 
                     </div>
                     <div class="cardsInPlay">
@@ -143,16 +152,14 @@
                 <div class="midMidGrid">
                     <div class="deckGrid">
                         <img src="assets/cardDeck.png" alt="scope" class="responsive">
-                        <img src="assets/cardDeck.png" alt="scope" class="responsive">
+                        <img src="assets/discardPile.png" alt="scope" class="responsive">
 
                     </div>
                     <div class="deckInstructions">
-                        End Turn/Draw
-
                     </div>
 
                 </div>
-                <div class="e5 rightGrid">
+                <div id="e5" class="rightGrid">
 
                     <div class="playerName">
                         .playerName
@@ -160,7 +167,9 @@
 
                     <div class="characterCard">
                         <!--.characterCard-->
-                        <img src="assets/cards/Rose Doolan.png" alt="Black Jack description" class="responsive">
+                        <img id="midright"  alt="Black Jack description"
+                            class="responsive cardOnly">
+                        <img  src="assets/SheriffStar.png" alt="Black Jack description" class="sheriffStar responsive">
 
                     </div>
                     <div class="cardsInPlay">
@@ -172,23 +181,29 @@
 
                     </div>
                     <div class="bulletTray">
-                        .bulletTray
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+
                     </div>
                     <div class="privateHand">
-                        .privateHand
-
+                        <img src="assets/cardBack.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
+                        <img src="assets/cardOverlap.png" alt="" class="responsive">
                     </div>
-
-
                 </div>
             </div>
             <div class="bottomPane">
                 <div class="leftFore">
                     <div class="actionLogPanel">
                         <b>Action Log</b>
-                        <div ID="actionLogWindow">
-                            Note: this text currently shows up at the bottom because of the way I have things scrolling
-                            off-screen. I will see if there's a better way later... (might need some code) </div>
+                        <div ID="actionLogWindow"></div>
                         <div>
                             <button class="btn-sand" id="LeaderboardBtn"
                                 style="height:28px; width: 100px; margin: 3px">Leaderboard</button>
@@ -198,48 +213,92 @@
                         </div>
 
                     </div>
-                </div>
-                <div class="midFore">
+
+
 
                 </div>
+
+                <div id="a5" class="midFore">
+                    <div id="mainCharacterCard">
+                        <img id="maincharacterimage"  alt="" class="responsive">
+
+                    </div>
+                    <div id="mainCardsInPlay">
+                        <img src="assets/cards/schofield.png" alt="scope" class="responsive">
+                        <img src="assets/cards/scope.png" alt="scope" class="responsive">
+                        <img src="assets/cards/mustang.png" alt="scope" class="responsive">
+                    </div>
+
+                    <div id="mainHand">
+                        <img src="assets/cards/bang.png" alt="bang" class="responsive">
+                        <img src="assets/cards/bang.png" alt="bang" class="responsive">
+                        <img src="assets/cards/bang.png" alt="bang" class="responsive">
+                        <img src="assets/cards/bang.png" alt="bang" class="responsive">
+                        <img src="assets/cards/bang.png" alt="bang" class="responsive">
+                        <img src="assets/cards/bang.png" alt="bang" class="responsive">
+
+                    </div>
+                    <div id="mainBullets">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+                        <img src="assets/bullet.png" alt="" class="responsive">
+
+                    </div>
+                    <div id="mainName">
+                        Playername
+                    </div>
+                    <div id="mainRoleCard">
+                        <img src="assets/cards/Renegade.png" alt="" class="responsive">
+                    </div>
+
+                    <div class="messagePanel">
+                    <div id="nameturn"></div>
+                     <div id="phase"></div>
+                   
+                    <div id="timeturn"></div>
+                    </div>
+                </div>
+
+
+
+
                 <div class="rightFore">
                     <div class="messagePanel">
                         <b>Messages</b>
                         <div ID="messageWindow">
-
                         </div>
-                        <label style="padding-top:20px; margin-bottom:0px; padding-bottom:0px; color:black" for="msgInput"><b>Send a message</b></label>
+                        <label style="padding-top:20px; margin-bottom:0px; padding-bottom:0px; color:black"
+                            for="msgInput"><b>Send a message</b></label>
                         <div class="input-field inline" style="padding-top:0px; margin-top:0px">
-                            <input type="text" id="msgInput" > </div>
-                            <button class="btn-send right input-field" id="sendMsgBtn" style="padding-top:0px; margin-top:2px; margin-left:0px"><i
+                            <input type="text" id="msgInput"> </div>
+                        <button class="btn-send right input-field" id="sendMsgBtn"
+                            style="padding-top:0px; margin-top:2px; margin-left:0px"><i
                                 class="material-icons tiny">send</i></button>
                         <div>
                             <div>
-                                <button class="btn-sand" id="quitBtn" style="height:28px; width: 100px; margin: 3px">Quit
+                                <button class="btn-sand" id="quitBtn"
+                                    style="height:28px; width: 100px; margin: 3px">Quit
                                     game</button>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
 
-
-        </div>
-
-        </div>
     </main>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
     <!-- Compiled and minified JavaScript -->
-    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script type="module" src="../services/displayServices.js"></script> 
+   <script src="/socket.io/socket.io.js"></script>
+    <script type="module" src="index.js"></script>
 
-    <script src="index.js"></script>
 
 </body>
 
