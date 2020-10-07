@@ -12,20 +12,162 @@ let checkuserexist=false
 let statusgame=""
 let socketofeachuser;
 let checksocketexist=false
+let playerData=[]
+
+let currenttime=""
+let phasetime=""
+let phasestatus=""
+let statuscharactercard=""
+
+let minutes=""
+let seconds=""
+let idround=1
+
+let statusphase=""
+let listcharactercards=[{"id":1,"charactername":"Suzy Lafayette","maxlifepoints":4},{"id":2,"charactername":"Vulture Sam","maxlifepoints":4},{"id":3,"charactername":"Willy The Kid","maxlifepoints":4},{"id":4,"charactername":"Rose Doolan","maxlifepoints":4},{"id":5,"charactername":"Paul Regret","maxlifepoints":3}]
+let player = {
+  name: "name",
+  socket: "empty",
+  id: "empty",
+  role: "role",
+  character: "character",
+  position: "position",
+  maxLife: "maxLife",
+  currentLife: "currentLife",
+  weapon: "weapon",
+  scope: false,
+  mustang: false,
+  barrel: false,
+  jail: false,
+  dynamite: false,
+  hand: [
+      {"id": 1, "name": 'empty', }
+  ]
+}
+//Interval for getting time
+let myVar = setInterval(checkcurrenttime, 100);
+//Interval for updating phase
+let myVar1 = setInterval(updatephase, 100);
 
 //Run node as a web server for hosting static files (html)
 app.use(express.static(__dirname+"/public"))
+
+function checkcurrenttime(){
+  currenttime=new Date()
+      // Find the distance between now and the count down date
+    let distance = phasetime - currenttime;  
+     minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+     seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      //When starting game, we will start randomly give character card to each user
+  if(statusgame=='START GAME'&&statuscharactercard==""){
+    getrandomcharactercards(listcharactercards)
+    console.log(playerData)
+    io.emit("randomgivecharacter",JSON.stringify(playerData))
+    statuscharactercard="Finished"
+  }
+  
+if(phasetime!=""){
+  let data={min:minutes,sec:seconds,name:statusphase.name,phase:statusphase.phase}
+  io.emit("timeupdate",data)
+}
+
+
+}
+//Function for updating phase
+function updatephase(){
+if(statusgame=='START GAME'&&phasestatus==""){
+  phasestatus="Starting"
+}
+if(phasestatus=="Starting"){
+   statusphase={id:idround,phase:1,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
+   phasetime=new Date (currenttime );
+   phasetime.setSeconds (phasetime.getSeconds() + 15 );
+   io.emit("infophase",statusphase)  
+   phasestatus="Ongoing"
+  return;
+}
+if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==1){
+  statusphase={id:idround,phase:2,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
+  phasetime=new Date (currenttime );
+  phasetime.setSeconds ( phasetime.getSeconds() + 20 );  
+  io.emit("infophase",statusphase)  
+  return;
+
+}
+if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==2){
+  statusphase={id:idround,phase:3,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
+   phasetime=new Date (currenttime );
+   phasetime.setSeconds (phasetime.getSeconds() + 60 );
+   io.emit("infophase",statusphase)    
+   return;
+
+  }
+if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==3){
+  if(idround==5){
+    idround=1
+  }
+  else{
+    idround++
+  }
+  statusphase={id:idround,phase:1,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
+  phasetime=new Date (currenttime );
+  phasetime.setSeconds (phasetime.getSeconds() + 15 );
+  io.emit("infophase",statusphase)  
+  return;
+}
+
+// if(statusphase!="")
+// console.log(statusphase)
+
+}
+//Function for giving random character cards
+function getrandomcharactercards(items){
+  let item = items[Math.floor(Math.random() * items.length)];
+  let charactername=item["charactername"]
+  playerData[0].character=charactername
+  playerData[0].maxLife = playerData[0].currentLife = item["maxlifepoints"];
+  let index = items.indexOf(item);
+  items.splice(index, 1);
+
+   item = items[Math.floor(Math.random() * items.length)];
+    charactername=item["charactername"]
+   playerData[1].character=charactername
+   playerData[1].maxLife = playerData[1].currentLife = item["maxlifepoints"];
+   index = items.indexOf(item);
+  items.splice(index, 1);
+
+   item = items[Math.floor(Math.random() * items.length)];
+    charactername=item["charactername"]
+   playerData[2].character=charactername
+   playerData[2].maxLife = playerData[2].currentLife = item["maxlifepoints"];
+   index = items.indexOf(item);
+  items.splice(index, 1);
+
+   item = items[Math.floor(Math.random() * items.length)];
+    charactername=item["charactername"]
+   playerData[3].character=charactername
+   playerData[3].maxLife = playerData[3].currentLife = item["maxlifepoints"];
+   index = items.indexOf(item);
+  items.splice(index, 1);
+
+   item = items[Math.floor(Math.random() * items.length)];
+    charactername=item["charactername"]
+   playerData[4].character=charactername
+   playerData[4].maxLife = playerData[4].currentLife = item["maxlifepoints"];
+}
+
+
 
 //Function to update user id (position) after one user go out the game room
 function  order_user(deleteid)
 {
 if(deleteid==1){
-  listdesuser.forEach((user) => { 
+  playerData.forEach((user) => { 
     user.id--
   });
 }
 else if(deleteid!=1&&deleteid<5){
-  listdesuser.forEach((user) => { 
+  playerData.forEach((user) => { 
     if(user.id>deleteid){
       user.id--
     }    
@@ -35,7 +177,7 @@ else if(deleteid!=1&&deleteid<5){
 
 // Function to check username is exist or not
 function checkexist(username,socketid){
-  listdesuser.forEach((user) => {
+  playerData.forEach((user) => {
     if(user.name==username){
       checkuserexist=true
       return;
@@ -44,7 +186,7 @@ function checkexist(username,socketid){
 }
 // Function to check username is exist or not
 function checksocketidexist(username,socketid){
-  listdesuser.forEach((user) => {
+  playerData.forEach((user) => {
     if(user.socket==socketid){
       checksocketexist=true
       return;
@@ -66,7 +208,7 @@ function checkvalidation(username,socketid,res){
     message="You already registered"
     checksocketexist=false
   }
-  else if(listdesuser.length>=5){
+  else if(playerData.length>=5){
     message="There are five people in game room"
   }
   else{
@@ -78,15 +220,33 @@ return message
 //Function to push user information to list
 function pushdatatolist(username,socketid){
 count++
-let  userinfo = { id: count ,name: username, socket:socketid};
-listdesuser.push(userinfo)
-io.emit("descriptionuser",JSON.stringify(listdesuser))
-io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
+let newPlayer =  {
+  name: username,
+  socket: socketid,
+  id: count,
+  role: "role",
+  character: "character",
+  position: count,
+  maxLife: "maxLife",
+  currentLife: "currentLife",
+  weapon: "weapon",
+  scope: false,
+  mustang: false,
+  barrel: false,
+  jail: false,
+  dynamite: false,
+  hand: [
+      {"id": 1, "name": 'empty', },
+  ],
+}
+playerData.push(newPlayer);
+io.emit("descriptionuser",JSON.stringify(playerData))
+io.emit("statusgame","Wating for more " +(5-playerData.length)+ " People") 
 }
 
 //Function to count the number players
 function checknumberofplayer(){
-  const numberofuser=listdesuser.length
+  const numberofuser=playerData.length
    // If array length =5 (enough players) => Game Status=Game start
     if(numberofuser==5){
       statusgame="START GAME"
@@ -94,13 +254,13 @@ function checknumberofplayer(){
     }
     //If do not have enough player => Return the amount of waiting players.
     else{
-    statusgame="Wating for more " +(5-listdesuser.length)+ " People"
+    statusgame="Wating for more " +(5-playerData.length)+ " People"
     io.emit("statusgame",statusgame) 
     }   
 }
 function checkuserdisconnect(socketid){
   let username
-  listdesuser.forEach((user) => { 
+  playerData.forEach((user) => { 
     if(user.socket==socketid){
        username=user.name
       return
@@ -112,22 +272,23 @@ function checkuserdisconnect(socketid){
 
 //Function when one user out game
 function userdisconnection(socketidout){
-  listdesuser.forEach((user) => {
+  playerData.forEach((user) => {
     if(user.socket==socketidout){
-     let lengtharrayuser=listdesuser.length
+      console.log(socketidout)
+     let lengtharrayuser=playerData.length
      let deleteid=user.id
-     listdesuser.splice((user.id-1),1)
+     playerData.splice((user.id-1),1)
      count--
      if(lengtharrayuser>0){
       order_user(parseInt(deleteid))
      }
-     io.emit("descriptionuser",JSON.stringify(listdesuser)) 
+     io.emit("descriptionuser",JSON.stringify(playerData)) 
     }
     return;
   });
     // Update the amount of waiting players
     if(statusgame!="start game"){
-    io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People") 
+    io.emit("statusgame","Wating for more " +(5-playerData.length)+ " People") 
     }  
 }
 app.get('/submitname', function(req, res) {
@@ -142,12 +303,12 @@ checknumberofplayer()
 });
 
 app.get('/desuser', function(req, res){
-  res.send("Wating for more " +(5-listdesuser.length)+ " People")
-  io.emit("descriptionuser",JSON.stringify(listdesuser)) 
+  res.send("Wating for more " +(5-playerData.length)+ " People")
+  io.emit("descriptionuser",JSON.stringify(playerData)) 
 });
 
 app.get('/status', function(req, res){
-  io.emit("statusgame","Wating for more " +(5-listdesuser.length)+ " People")   
+  io.emit("statusgame","Wating for more " +(5-playerData.length)+ " People")   
 });
 app.get('/socketid', function(req, res){
   res.send(socketofeachuser)
@@ -166,8 +327,8 @@ app.get('/chatbox', function(req, res){
   });
 
 app.get('/actionLog', function(req, res){
-    const name=req.query.name
-   const action = req.query.action
+    const name = req.query.name
+    const action = req.query.action
     const data={
       name:name,
       action:action
@@ -176,20 +337,26 @@ app.get('/actionLog', function(req, res){
     res.send("action log hit")
     });
 
+app.get('/newUser', function(data){
+    const name = data.name
+    const socketid = data.socket
+ 
+})
+
 io.on('connection', (socket) => {
     socketofeachuser=socket.id
     socket.on('disconnect', (reason) => {
-    const name=checkuserdisconnect(socket.id)
       const data ={
-        name:name,
+        name:"user",
         action: " disconnected"
       }
 
       userdisconnection(socket.id)
       io.emit("updateactionlog",data) 
       });
-  })
-  ;
+  });
+
+
   function insertion(){
     // Replace the following with your Atlas connection string                                                                                                                                        
   const url = "mongodb+srv://eGTB4yl0HFJQ6lzD:eGTB4yl0HFJQ6lzD@project.wdfid.mongodb.net/Project?retryWrites=true&w=majority";
@@ -288,7 +455,18 @@ io.on('connection', (socket) => {
            col = db.collection("Disconnection");
            myobj = { user_name: "voungtan", Rank : 1,Round :1,User_Order:4}
            await col.insertOne(myobj);
-  
+           col = db.collection("HistoryRecord");
+           myobj = { RecordID: 1, Username : "Abo",Rank :1,Round:4}
+           await col.insertOne(myobj);
+           col = db.collection("PlayingCard");
+           myobj = { PlayingCardID: 1, PlayingCardID :"ACE",PlayingCardDescription :"hbchj",PlayingCardImages:"101124"}
+           await col.insertOne(myobj);
+           col = db.collection("RoleCard");
+           myobj = { RoleCardID: 1, RoleCardName :"ACE",RoleCardDescription :"hbchj",RoleCardImages:"101124"}
+           await col.insertOne(myobj);
+           col = db.collection("CharacterCard");
+           myobj = { CharacterCardID: 1, CharacterCardName :"ACE",CharacterCardDescription :"hbchj",CharacterCardImages:"101124"}
+           await col.insertOne(myobj);
   
   
            console.log("Inserted");
