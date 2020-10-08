@@ -14,7 +14,21 @@ let socketofeachuser;
 let checksocketexist=false
 let playerData=[]
 
+<<<<<<< HEAD
 
+=======
+let currenttime=""
+let phasetime=""
+let phasestatus=""
+let statuscharactercard=""
+
+let minutes=""
+let seconds=""
+let idround=1
+
+let statusphase=""
+let listcharactercards=[{"id":1,"charactername":"Suzy Lafayette","maxlifepoints":4},{"id":2,"charactername":"Vulture Sam","maxlifepoints":4},{"id":3,"charactername":"Willy The Kid","maxlifepoints":4},{"id":4,"charactername":"Rose Doolan","maxlifepoints":4},{"id":5,"charactername":"Paul Regret","maxlifepoints":3}]
+>>>>>>> origin/UIdev
 let player = {
   name: "name",
   socket: "empty",
@@ -32,11 +46,126 @@ let player = {
   dynamite: false,
   hand: [
       {"id": 1, "name": 'empty', }
+<<<<<<< HEAD
   ],
 }
+=======
+  ]
+}
+//Interval for getting time
+let myVar = setInterval(checkcurrenttime, 100);
+//Interval for updating phase
+let myVar1 = setInterval(updatephase, 100);
+>>>>>>> origin/UIdev
 
 //Run node as a web server for hosting static files (html)
 app.use(express.static(__dirname+"/public"))
+
+function checkcurrenttime(){
+  currenttime=new Date()
+      // Find the distance between now and the count down date
+    let distance = phasetime - currenttime;  
+     minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+     seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      //When starting game, we will start randomly give character card to each user
+  if(statusgame=='START GAME'&&statuscharactercard==""){
+    getrandomcharactercards(listcharactercards)
+    console.log(playerData)
+    io.emit("randomgivecharacter",JSON.stringify(playerData))
+    statuscharactercard="Finished"
+  }
+  
+if(phasetime!=""){
+  let data={min:minutes,sec:seconds,name:statusphase.name,phase:statusphase.phase}
+  io.emit("timeupdate",data)
+}
+
+
+}
+//Function for updating phase
+function updatephase(){
+if(statusgame=='START GAME'&&phasestatus==""){
+  phasestatus="Starting"
+}
+if(phasestatus=="Starting"){
+   statusphase={id:idround,phase:1,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
+   phasetime=new Date (currenttime );
+   phasetime.setSeconds (phasetime.getSeconds() + 15 );
+   io.emit("infophase",statusphase)  
+   phasestatus="Ongoing"
+  return;
+}
+if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==1){
+  statusphase={id:idround,phase:2,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
+  phasetime=new Date (currenttime );
+  phasetime.setSeconds ( phasetime.getSeconds() + 20 );  
+  io.emit("infophase",statusphase)  
+  return;
+
+}
+if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==2){
+  statusphase={id:idround,phase:3,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
+   phasetime=new Date (currenttime );
+   phasetime.setSeconds (phasetime.getSeconds() + 60 );
+   io.emit("infophase",statusphase)    
+   return;
+
+  }
+if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==3){
+  if(idround==5){
+    idround=1
+  }
+  else{
+    idround++
+  }
+  statusphase={id:idround,phase:1,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
+  phasetime=new Date (currenttime );
+  phasetime.setSeconds (phasetime.getSeconds() + 15 );
+  io.emit("infophase",statusphase)  
+  return;
+}
+
+// if(statusphase!="")
+// console.log(statusphase)
+
+}
+//Function for giving random character cards
+function getrandomcharactercards(items){
+  let item = items[Math.floor(Math.random() * items.length)];
+  let charactername=item["charactername"]
+  playerData[0].character=charactername
+  playerData[0].maxLife = playerData[0].currentLife = item["maxlifepoints"];
+  let index = items.indexOf(item);
+  items.splice(index, 1);
+
+   item = items[Math.floor(Math.random() * items.length)];
+    charactername=item["charactername"]
+   playerData[1].character=charactername
+   playerData[1].maxLife = playerData[1].currentLife = item["maxlifepoints"];
+   index = items.indexOf(item);
+  items.splice(index, 1);
+
+   item = items[Math.floor(Math.random() * items.length)];
+    charactername=item["charactername"]
+   playerData[2].character=charactername
+   playerData[2].maxLife = playerData[2].currentLife = item["maxlifepoints"];
+   index = items.indexOf(item);
+  items.splice(index, 1);
+
+   item = items[Math.floor(Math.random() * items.length)];
+    charactername=item["charactername"]
+   playerData[3].character=charactername
+   playerData[3].maxLife = playerData[3].currentLife = item["maxlifepoints"];
+   index = items.indexOf(item);
+  items.splice(index, 1);
+
+   item = items[Math.floor(Math.random() * items.length)];
+    charactername=item["charactername"]
+   playerData[4].character=charactername
+   playerData[4].maxLife = playerData[4].currentLife = item["maxlifepoints"];
+}
+
+
 
 //Function to update user id (position) after one user go out the game room
 function  order_user(deleteid)
@@ -116,7 +245,11 @@ let newPlayer =  {
   jail: false,
   dynamite: false,
   hand: [
+<<<<<<< HEAD
       {"id": 1, "name": 'empty', }
+=======
+      {"id": 1, "name": 'empty', },
+>>>>>>> origin/UIdev
   ],
 }
 playerData.push(newPlayer);
@@ -237,11 +370,14 @@ io.on('connection', (socket) => {
   });
 
 
+<<<<<<< HEAD
 
 
 
 
 
+=======
+>>>>>>> origin/UIdev
   function insertion(){
     // Replace the following with your Atlas connection string                                                                                                                                        
   const url = "mongodb+srv://eGTB4yl0HFJQ6lzD:eGTB4yl0HFJQ6lzD@project.wdfid.mongodb.net/Project?retryWrites=true&w=majority";
