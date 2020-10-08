@@ -171,12 +171,14 @@ function  order_user(deleteid)
 if(deleteid==1){
   playerData.forEach((user) => { 
     user.id--
+    user.position--
   });
 }
 else if(deleteid!=1&&deleteid<5){
   playerData.forEach((user) => { 
     if(user.id>deleteid){
       user.id--
+      user.position--
     }    
   });
 }
