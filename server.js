@@ -14,21 +14,6 @@ let socketofeachuser;
 let checksocketexist=false
 let playerData=[]
 
-<<<<<<< HEAD
-
-=======
-let currenttime=""
-let phasetime=""
-let phasestatus=""
-let statuscharactercard=""
-
-let minutes=""
-let seconds=""
-let idround=1
-
-let statusphase=""
-let listcharactercards=[{"id":1,"charactername":"Suzy Lafayette","maxlifepoints":4},{"id":2,"charactername":"Vulture Sam","maxlifepoints":4},{"id":3,"charactername":"Willy The Kid","maxlifepoints":4},{"id":4,"charactername":"Rose Doolan","maxlifepoints":4},{"id":5,"charactername":"Paul Regret","maxlifepoints":3}]
->>>>>>> origin/UIdev
 let player = {
   name: "name",
   socket: "empty",
@@ -46,17 +31,8 @@ let player = {
   dynamite: false,
   hand: [
       {"id": 1, "name": 'empty', }
-<<<<<<< HEAD
   ],
 }
-=======
-  ]
-}
-//Interval for getting time
-let myVar = setInterval(checkcurrenttime, 100);
-//Interval for updating phase
-let myVar1 = setInterval(updatephase, 100);
->>>>>>> origin/UIdev
 
 //Run node as a web server for hosting static files (html)
 app.use(express.static(__dirname+"/public"))
@@ -79,8 +55,6 @@ if(phasetime!=""){
   let data={min:minutes,sec:seconds,name:statusphase.name,phase:statusphase.phase}
   io.emit("timeupdate",data)
 }
-
-
 }
 //Function for updating phase
 function updatephase(){
@@ -245,11 +219,7 @@ let newPlayer =  {
   jail: false,
   dynamite: false,
   hand: [
-<<<<<<< HEAD
-      {"id": 1, "name": 'empty', }
-=======
       {"id": 1, "name": 'empty', },
->>>>>>> origin/UIdev
   ],
 }
 playerData.push(newPlayer);
@@ -370,14 +340,11 @@ io.on('connection', (socket) => {
   });
 
 
-<<<<<<< HEAD
 
 
 
 
 
-=======
->>>>>>> origin/UIdev
   function insertion(){
     // Replace the following with your Atlas connection string                                                                                                                                        
   const url = "mongodb+srv://eGTB4yl0HFJQ6lzD:eGTB4yl0HFJQ6lzD@project.wdfid.mongodb.net/Project?retryWrites=true&w=majority";
