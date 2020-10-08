@@ -36,12 +36,12 @@
             </div>
 
             <div class="gameRoom">
-                <div id="player1">[player 1 name] </div>
-                <div id="player2">[player 2 name] </div>
-                <div id="player3">[player 3 name] </div>
+                <div id="player1"> </div>
+                <div id="player2"> </div>
+                <div id="player3"> </div>
                 <div id="player4"></div>
                 <div id="player5"></div>
-                <div id="waiting">Waiting for 2 more players... </div>
+                <div id="waiting"> </div>
 
             </div>
             <div class="welcomeJoinGame">
@@ -70,12 +70,10 @@
                         <img src="assets/cardOverlap.png" alt="" class="responsive">
                     </div>
                     <div class="characterCard">
-                        <img src="assets/cards/Paul Regret.png" alt="description" class="responsive cardOnly">
+                        <img id="topleft"  alt="description" class="responsive cardOnly">
                     </div>
                     <div class="cardsInPlay">
-                        <img src="assets/cards/volcanic.png" alt="description" class="responsive cardOnly">
-                        <img src="assets/cards/winchester.png" alt="description" class="responsive cardOnly">
-
+                        <img id="c5WeaponCard" src=" " alt="description" class="responsive cardOnly">
                     </div>
                 </div>
                 <div class="topMiddleGrid">
@@ -93,12 +91,11 @@
                     </div>
 
                     <div class="cardsInPlay">
-                        <img src="assets/cards/mustang.png" alt="description" class="responsive cardOnly">
-                        <img src="assets/cards/winchester.png" alt="description" class="responsive cardOnly">
+                        <img src="assets/cards/mustang.png" alt="description" class="responsive cardOnly" hidden>
+                        <img id="d5WeaponCard" src="assets/cards/winchester.png" alt="description" class="responsive cardOnly">
                     </div>
                     <div class="characterCard">
-                        <img src="assets/cards/calamity janet.png" alt="Black Jack description"
-                            class="responsive cardOnly">
+                        <img id="topright"  alt="Black Jack description" class="responsive cardOnly">
 
                     </div>
                     <div class="bulletTray">
@@ -137,14 +134,14 @@
                         <img src="assets/cardOverlap.png" alt="" class="responsive"> </div>
                     <div class="characterCard">
                         <!--.characterCard-->
-                        <img src="assets/cards/Black Jack.png" alt="Black Jack description" class="responsive">
+                        <img id="midleft"  alt="Black Jack description" class="responsive">
 
                     </div>
                     <div class="cardsInPlay">
                         <!--.cardsInPlay-->
-                        <img src="assets/cards/scope.png" alt="scope" class="responsive">
-                        <img src="assets/cards/rev carabine.png" alt="scope" class="responsive">
-                        <img src="assets/cards/barrel.png" alt="scope" class="responsive">
+                        <img src="assets/cards/scope.png" alt="scope" class="responsive" hidden>
+                        <img id="b5WeaponCard" src="assets/cards/rev carabine.png" alt="scope" class="responsive">
+                        <img src="assets/cards/barrel.png" alt="scope" class="responsive" hidden>
 
 
                     </div>
@@ -167,16 +164,16 @@
 
                     <div class="characterCard">
                         <!--.characterCard-->
-                        <img src="assets/cards/Rose Doolan.png" alt="Black Jack description"
+                        <img id="midright"  alt="Black Jack description"
                             class="responsive cardOnly">
-                        <img src="assets/SheriffStar.png" alt="Black Jack description" class="sheriffStar responsive">
+                        <img  src="assets/SheriffStar.png" alt="Black Jack description" class="sheriffStar responsive">
 
                     </div>
                     <div class="cardsInPlay">
                         <!--.cardsInPlay-->
-                        <img src="assets/cards/Jail.png" alt="scope" class="responsive">
-                        <img src="assets/cards/winchester.png" alt="scope" class="responsive">
-                        <img src="assets/cards/dynamite.png" alt="scope" class="responsive">
+                        <img src="assets/cards/Jail.png" alt="scope" class="responsive" hidden>
+                        <img id="e5WeaponCard" src="assets/cards/winchester.png" alt="scope" class="responsive">
+                        <img src="assets/cards/dynamite.png" alt="scope" class="responsive" hidden>
 
 
                     </div>
@@ -217,15 +214,16 @@
 
 
                 </div>
+
                 <div id="a5" class="midFore">
                     <div id="mainCharacterCard">
-                        <img src="assets/cards/Willy The Kid.png" alt="" class="responsive">
+                        <img id="maincharacterimage"  alt="" class="responsive">
 
                     </div>
                     <div id="mainCardsInPlay">
-                        <img src="assets/cards/schofield.png" alt="scope" class="responsive">
-                        <img src="assets/cards/scope.png" alt="scope" class="responsive">
-                        <img src="assets/cards/mustang.png" alt="scope" class="responsive">
+                        <img id="mainCharacterWeapon" src="assets/cards/schofield.png" alt="scope" class="responsive">
+                      <!-- <img src="assets/cards/scope.png" alt="scope" class="responsive">
+                        <img src="assets/cards/mustang.png" alt="scope" class="responsive"> -->
                     </div>
 
                     <div id="mainHand">
@@ -249,9 +247,18 @@
                     </div>
                     <div id="mainRoleCard">
                         <img src="assets/cards/Renegade.png" alt="" class="responsive">
+                    </div>
 
+                    <div class="messagePanelforphase">
+                    <div id="nameturn"></div>
+                     <div id="phase"></div>
+                   
+                    <div id="timeturn"></div>
                     </div>
                 </div>
+
+
+
 
                 <div class="rightFore">
                     <div class="messagePanel">
@@ -280,7 +287,6 @@
     </main>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
