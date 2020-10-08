@@ -30,18 +30,6 @@ window.onload = function (e) {
 
 
 //Join Game button
-<<<<<<< HEAD
-  $(document).ready(function(){
-    $("#joinGameBtn").click(function(){
-      let username=$('#joinName').val()
-      let action= 'joined the game'
-      if(username!=""){
-      const user={
-        user:username,
-        socket:socketid,
-        }
-      $.get('/submitname',user, function (responsedata) {
-=======
 $(document).ready(function () {
   $("#joinGameBtn").click(function () {
     let username = $('#joinName').val()
@@ -52,7 +40,6 @@ $(document).ready(function () {
         socket: socketid,
       }
       $.get('/submitname', user, function (responsedata) {
->>>>>>> origin/UIdev
         alert(responsedata)
         if (responsedata == "Successful") {
           nameplayer = user.user
@@ -62,18 +49,10 @@ $(document).ready(function () {
             action: action,
             socket: socketid
           }
-<<<<<<< HEAD
-          
-        $.get('/actionLog',data)
-        $.get('/newUser', data)
-      }
-        statusregis=responsedata     
-=======
           $.get('/actionLog', data)
           $.get('/newUser', data)
         }
         statusregis = responsedata
->>>>>>> origin/UIdev
       })
       $('#joinName').val("")
     }
@@ -325,22 +304,6 @@ function updateHandSizeDisplay(mydata, data) {
   });
 }
 
-<<<<<<< HEAD
-  function updatelistuser(listdata){
-     $('#player1').empty()
-     $('#player2').empty()
-     $('#player3').empty()
-     $('#player4').empty()
-     $('#player5').empty()
-     const mydata= JSON.parse(listdata)       
-     mydata.forEach((data) => {
-      console.log(data.id)
-      const player="#player"+data.id
-      $(player).append("Player "+data.id+": "+data.name)
-    });
-
-  }
-=======
 function updateBulletDisplay(mydata, data) {
   $("#mainBullets").html(getBulletString(data));
   if (data.id == 1) {
@@ -374,4 +337,3 @@ function updateBulletDisplay(mydata, data) {
     $("#e5 .bulletTray").html(getBulletString(mydata[3]));
   }
 }
->>>>>>> origin/UIdev
