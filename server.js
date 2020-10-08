@@ -15,9 +15,6 @@ let socketofeachuser;
 let checksocketexist=false
 let playerData=[]
 
-<<<<<<< HEAD
-
-=======
 let currenttime=""
 let phasetime=""
 let phasestatus=""
@@ -29,7 +26,6 @@ let idround=1
 
 let statusphase=""
 let listcharactercards=[{"id":1,"charactername":"Suzy Lafayette","maxLife":4},{"id":2,"charactername":"Vulture Sam","maxLife":4},{"id":3,"charactername":"Willy The Kid","maxLife":4},{"id":4,"charactername":"Rose Doolan","maxLife":4},{"id":5,"charactername":"Paul Regret","maxLife":3}]
->>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
 let player = {
   name: "name",
   socket: "empty",
@@ -49,13 +45,10 @@ let player = {
       {"id": 1, "name": 'empty', }
   ],
 }
-<<<<<<< HEAD
-=======
 //Interval for getting time
 let myVar = setInterval(checkcurrenttime, 100);
 //Interval for updating phase
 let myVar1 = setInterval(updatephase, 100);
->>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
 
 //Run node as a web server for hosting static files (html)
 app.use(express.static(__dirname+"/public"))
@@ -71,6 +64,8 @@ function checkcurrenttime(){
     getrandomcharactercards(listcharactercards)
     console.log(playerData)
     io.emit("randomgivecharacter",JSON.stringify(playerData))
+    io.emit("weaponUpdate",JSON.stringify(playerData))
+    
     statuscharactercard="Finished"
   }
   
@@ -246,7 +241,7 @@ let newPlayer =  {
   position: count,
   maxLife: "maxLife",
   currentLife: "currentLife",
-  weapon: "weapon",
+  weapon: "colt45",
   scope: false,
   mustang: false,
   barrel: false,
@@ -257,10 +252,6 @@ let newPlayer =  {
   ],
 }
 playerData.push(newPlayer);
-<<<<<<< HEAD
-console.log(playerData)
-=======
->>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
 io.emit("descriptionuser",JSON.stringify(playerData))
 io.emit("statusgame","Wating for more " +(5-playerData.length)+ " People") 
 }
@@ -378,14 +369,6 @@ io.on('connection', (socket) => {
   });
 
 
-<<<<<<< HEAD
-
-
-
-
-
-=======
->>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
   function insertion(){
     // Replace the following with your Atlas connection string                                                                                                                                        
   const url = "mongodb+srv://eGTB4yl0HFJQ6lzD:eGTB4yl0HFJQ6lzD@project.wdfid.mongodb.net/Project?retryWrites=true&w=majority";

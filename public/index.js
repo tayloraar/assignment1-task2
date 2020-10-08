@@ -1,10 +1,6 @@
 let socketid;
 let statusregis;
 let nameplayer;
-<<<<<<< HEAD
-let role;
-let action;
-=======
 
 let role;
 let action;
@@ -13,7 +9,6 @@ let character;
 let phasenumber
 let phaseuser
 
->>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
 let socket=io.connect('http://localhost:3000');
 
 
@@ -28,12 +23,10 @@ window.onload = function(e){
   getstatusgame()
   updatechatbox () 
   updateActionLog()
-<<<<<<< HEAD
-=======
   randomdelivercharactercard()
   getinforphase()
   updatetime()
->>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
+  updateWeapon()
 }
 
 
@@ -100,6 +93,7 @@ window.onload = function(e){
      }
     });
   });
+
 //Function to get information of phase
 function getinforphase(){
   socket.on("infophase",data=>{
@@ -192,10 +186,6 @@ else if(data.id==5){
     function updateActionLog(){
       socket.on('updateactionlog', data => {
         $('#actionLogWindow').append(`${data.name} has ${data.action}<br/>`)
-<<<<<<< HEAD
-      console.log("action log hit")
-=======
->>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
     });
   }
 //Get information of players and push to screen
@@ -219,3 +209,56 @@ else if(data.id==5){
     });
 
   }
+
+
+
+  //Update Weapon Card
+function updateWeapon(){
+  socket.on("weaponUpdate",data=>{
+    const mydata= JSON.parse(data)
+   mydata.forEach((data) => {
+    if(data.socket==socketid){
+      let weapon = data.weapon
+       console.log(weapon)
+       $("#mainCharacterWeapon").attr('src',"assets/cards/"+data.weapon+".png")
+      // $("#mainCardsInPlay").append(`<img src="assets/cards/${data.weapon}.png" alt="weapon" class="responsive">`)
+       displayWeapon(mydata,data)
+    }
+    })
+
+  })
+}
+//Get display order for wapon card
+function displayWeapon(mydata,data){
+  console.log(data.id)
+if(data.id==1){
+  $("#c5WeaponCard").attr('src',"assets/cards/"+mydata[2].weapon+".png")
+  $("#b5WeaponCard").attr('src',"assets/cards/"+mydata[1].weapon+".png")
+  $("#d5WeaponCard").attr('src',"assets/cards/"+mydata[3].weapon+".png")
+  $("#e5WeaponCard").attr('src',"assets/cards/"+mydata[4].weapon+".png")
+}
+else if(data.id==2){
+  $("#c5WeaponCard").attr('src',"assets/cards/"+mydata[3].weapon+".png")
+  $("#b5WeaponCard").attr('src',"assets/cards/"+mydata[2].weapon+".png")
+  $("#d5WeaponCard").attr('src',"assets/cards/"+mydata[4].weapon+".png")
+  $("#e5WeaponCard").attr('src',"assets/cards/"+mydata[0].weapon+".png")
+}
+else if(data.id==3){
+  $("#c5WeaponCard").attr('src',"assets/cards/"+mydata[4].weapon+".png")
+  $("#b5WeaponCard").attr('src',"assets/cards/"+mydata[3].weapon+".png")
+  $("#d5WeaponCard").attr('src',"assets/cards/"+mydata[0].weapon+".png")
+  $("#e5WeaponCard").attr('src',"assets/cards/"+mydata[1].weapon+".png")
+}
+else if(data.id==4){
+  $("#c5WeaponCard").attr('src',"assets/cards/"+mydata[0].weapon+".png")
+  $("#b5WeaponCard").attr('src',"assets/cards/"+mydata[4].weapon+".png")
+  $("#d5WeaponCard").attr('src',"assets/cards/"+mydata[1].weapon+".png")
+  $("#e5WeaponCard").attr('src',"assets/cards/"+mydata[2].weapon+".png")
+}
+else if(data.id==5){
+  $("#c5WeaponCard").attr('src',"assets/cards/"+mydata[1].weapon+".png")
+  $("#b5WeaponCard").attr('src',"assets/cards/"+mydata[0].weapon+".png")
+  $("#d5WeaponCard").attr('src',"assets/cards/"+mydata[2].weapon+".png")
+  $("#e5WeaponCard").attr('src',"assets/cards/"+mydata[3].weapon+".png")
+}
+}
