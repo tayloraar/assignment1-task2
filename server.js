@@ -1,3 +1,4 @@
+const { json } = require('express');
 const express = require('express')
 const moment=require('moment')
 const app = express()
@@ -120,6 +121,7 @@ let newPlayer =  {
   ],
 }
 playerData.push(newPlayer);
+console.log(playerData)
 io.emit("descriptionuser",JSON.stringify(playerData))
 io.emit("statusgame","Wating for more " +(5-playerData.length)+ " People") 
 }
