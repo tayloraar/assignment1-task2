@@ -160,7 +160,7 @@ function getrandomcharactercards(items){
     charactername=item["charactername"]
     maxlife=item["maxLife"]
     playerData[4].maxLife=maxlife
-   playerData[4].character=charactername
+    playerData[4].character=charactername
 }
 
 
