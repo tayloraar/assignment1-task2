@@ -24,7 +24,7 @@ let seconds=""
 let idround=1
 
 let statusphase=""
-let listcharactercards=[{"id":1,"charactername":"Suzy Lafayette"},{"id":2,"charactername":"Vulture Sam"},{"id":3,"charactername":"Willy The Kid"},{"id":4,"charactername":"Rose Doolan"},{"id":5,"charactername":"Paul Regret"}]
+let listcharactercards=[{"id":1,"charactername":"Suzy Lafayette","maxLife":4},{"id":2,"charactername":"Vulture Sam","maxLife":4},{"id":3,"charactername":"Willy The Kid","maxLife":4},{"id":4,"charactername":"Rose Doolan","maxLife":4},{"id":5,"charactername":"Paul Regret","maxLife":3}]
 let player = {
   name: "name",
   socket: "empty",
@@ -124,30 +124,42 @@ if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==3){
 function getrandomcharactercards(items){
   let item = items[Math.floor(Math.random() * items.length)];
   let charactername=item["charactername"]
+  let maxlife=item["maxLife"]
   playerData[0].character=charactername
+  playerData[0].maxLife=maxlife
+
   let index = items.indexOf(item);
   items.splice(index, 1);
 
    item = items[Math.floor(Math.random() * items.length)];
     charactername=item["charactername"]
+    maxlife=item["maxLife"]
    playerData[1].character=charactername
+   playerData[1].maxLife=maxlife
+
    index = items.indexOf(item);
   items.splice(index, 1);
 
    item = items[Math.floor(Math.random() * items.length)];
     charactername=item["charactername"]
+    maxlife=item["maxLife"]
+    playerData[2].maxLife=maxlife
    playerData[2].character=charactername
    index = items.indexOf(item);
   items.splice(index, 1);
 
    item = items[Math.floor(Math.random() * items.length)];
     charactername=item["charactername"]
+    maxlife=item["maxLife"]
+    playerData[3].maxLife=maxlife
    playerData[3].character=charactername
    index = items.indexOf(item);
   items.splice(index, 1);
 
    item = items[Math.floor(Math.random() * items.length)];
     charactername=item["charactername"]
+    maxlife=item["maxLife"]
+    playerData[4].maxLife=maxlife
    playerData[4].character=charactername
 }
 
