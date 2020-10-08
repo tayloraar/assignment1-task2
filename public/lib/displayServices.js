@@ -68,18 +68,3 @@ const displayHandSize = (payload) => {
   }
 }
 
-
-module.exports = {
-  displayHandSize,
-  displayGameBoard,
-  displayWelcomeScreen
-}
-
-
-/*
-in file to use...
-const display = require('../services/displayServices')
-then:
-display.displayGameBoard, etc, in code
-
-*/
