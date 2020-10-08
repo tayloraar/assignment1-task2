@@ -17,6 +17,5 @@ $(document).ready(function(){
    <script src="lib/turnPhaseService.js"></script>
    <script src="lib/joinGameService.js"></script>
     
-    `)
-}
-)
+    `)}
+);
