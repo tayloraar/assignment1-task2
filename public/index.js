@@ -1,9 +1,22 @@
 let socketid;
 let statusregis;
 let nameplayer;
+<<<<<<< HEAD
 let role;
 let action;
+=======
+
+let role;
+let action;
+let character;
+
+let phasenumber
+let phaseuser
+
+>>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
 let socket=io.connect('http://localhost:3000');
+
+
 window.onload = function(e){ 
   $.get('/desuser', function(res){
     $('#waiting').text(res)
@@ -15,6 +28,12 @@ window.onload = function(e){
   getstatusgame()
   updatechatbox () 
   updateActionLog()
+<<<<<<< HEAD
+=======
+  randomdelivercharactercard()
+  getinforphase()
+  updatetime()
+>>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
 }
 
 
@@ -67,7 +86,6 @@ window.onload = function(e){
       }
 
       $.get('/chatbox',data, function (responsedata) {
-           console.log(responsedata)
       })
 
       $.get('/actionLog',data)
@@ -82,8 +100,75 @@ window.onload = function(e){
      }
     });
   });
+//Function to get information of phase
+function getinforphase(){
+  socket.on("infophase",data=>{
+   console.log("Roundof: " +data.name+"---RoundofID: "+data.id+"----Phase: "+data.phase)
+   phaseuser=data.name
+   phasenumber=data.phase
+  })
+}
+//Function Update up to second about phase information
+function updatetime(){
+  socket.on("timeupdate",data=>{
+    $("#nameturn").empty()
+    $("#timeturn").empty()
+    $("#phase").empty()
+    console.log(data.phase)
+    $("#nameturn").append("Player :" +data.name)
+    $("#phase").append("Phase :" +data.phase)
+    $("#timeturn").append("Minute: "+data.min+" Seconds:"+data.sec)
 
+   })
+}
+//Random deliver charactercard
+function randomdelivercharactercard(){
+  socket.on("randomgivecharacter",data=>{
+    const mydata= JSON.parse(data)
+    mydata.forEach((data) => {
+    if(data.socket==socketid){
+       character=data.character
+       $("#maincharacterimage").attr('src',"assets/cards/"+data.character+".png")
+       displayordercharacter(mydata,data)
+    }
+    })
 
+  })
+}
+//Get display order for character card
+function displayordercharacter(mydata,data){
+  console.log(data.id)
+if(data.id==1){
+  $("#topleft").attr('src',"assets/cards/"+mydata[2].character+".png")
+  $("#midleft").attr('src',"assets/cards/"+mydata[1].character+".png")
+  $("#topright").attr('src',"assets/cards/"+mydata[3].character+".png")
+  $("#midright").attr('src',"assets/cards/"+mydata[4].character+".png")
+}
+else if(data.id==2){
+  $("#topleft").attr('src',"assets/cards/"+mydata[3].character+".png")
+  $("#midleft").attr('src',"assets/cards/"+mydata[2].character+".png")
+  $("#topright").attr('src',"assets/cards/"+mydata[4].character+".png")
+  $("#midright").attr('src',"assets/cards/"+mydata[0].character+".png")
+}
+else if(data.id==3){
+  $("#topleft").attr('src',"assets/cards/"+mydata[4].character+".png")
+  $("#midleft").attr('src',"assets/cards/"+mydata[3].character+".png")
+  $("#topright").attr('src',"assets/cards/"+mydata[0].character+".png")
+  $("#midright").attr('src',"assets/cards/"+mydata[1].character+".png")
+}
+else if(data.id==4){
+  $("#topleft").attr('src',"assets/cards/"+mydata[0].character+".png")
+  $("#midleft").attr('src',"assets/cards/"+mydata[4].character+".png")
+  $("#topright").attr('src',"assets/cards/"+mydata[1].character+".png")
+  $("#midright").attr('src',"assets/cards/"+mydata[2].character+".png")
+}
+else if(data.id==5){
+  $("#topleft").attr('src',"assets/cards/"+mydata[1].character+".png")
+  $("#midleft").attr('src',"assets/cards/"+mydata[0].character+".png")
+  $("#topright").attr('src',"assets/cards/"+mydata[2].character+".png")
+  $("#midright").attr('src',"assets/cards/"+mydata[3].character+".png")
+}
+}
 //Get number of user
   function getstatusgame(){
     socket.on('statusgame', data => {
@@ -107,7 +192,10 @@ window.onload = function(e){
     function updateActionLog(){
       socket.on('updateactionlog', data => {
         $('#actionLogWindow').append(`${data.name} has ${data.action}<br/>`)
+<<<<<<< HEAD
       console.log("action log hit")
+=======
+>>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
     });
   }
 //Get information of players and push to screen

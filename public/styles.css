@@ -5,9 +5,15 @@ html, body {
   margin: auto;
   }
 
+<<<<<<< HEAD
 
 
 
+=======
+
+
+
+>>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
   /* welcome screen styles */
   .welcomeGrid
 {
@@ -155,6 +161,7 @@ width:20px;
   max-height: 100%;
   max-width: 100%;
 }
+<<<<<<< HEAD
 
 #gameboard
 {
@@ -180,6 +187,33 @@ width:20px;
     margin: auto;
     max-height: 100%;
 
+=======
+
+#gameboard
+{
+    background-image: url('assets/darkerDesertscape.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 240px;
+    grid-row-gap: 5px;
+    padding: 10px;
+    height:100%;
+    margin-bottom:0px;
+}
+  .leftGrid {
+    display: grid;
+    grid-column-gap: 3px;
+    grid-row-gap: 0px;
+    grid-template-columns: 5fr 6fr 30fr;
+    grid-template-rows: 1fr 1fr 30fr;
+    padding:3px;
+    margin: auto;
+    max-height: 100%;
+
+>>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
   }
 
   .rightGrid {
@@ -284,12 +318,21 @@ text-align: center;
 margin:0px;
 padding:0px;
 }
+<<<<<<< HEAD
 
 #mainCardsInPlay img
 {
 max-width:15%;
 }
 
+=======
+
+#mainCardsInPlay img
+{
+max-width:15%;
+}
+
+>>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
 #mainHand img
 {
 /*will be dynamically adjusted for very large hands*/
@@ -357,7 +400,20 @@ width: 150px;
 height: 245px;
 margin: 2px;
 }
+<<<<<<< HEAD
 
+=======
+.messagePanelforphase
+{
+  background-color: rgb(190, 177, 160);
+  text-align: center;
+column-span: 1;
+border-radius:5px;
+width: 150px;
+height: 245px;
+margin: 122px;
+}
+>>>>>>> de7ce125356704e6cedad0b245ede180d5795c4b
 #messageWindow
 {
 font-size:0.7em;
