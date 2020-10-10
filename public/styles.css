@@ -5,6 +5,9 @@ html, body {
   margin: auto;
   }
 
+
+
+
   /* welcome screen styles */
   .welcomeGrid
 {
@@ -176,6 +179,7 @@ width:20px;
     padding:3px;
     margin: auto;
     max-height: 100%;
+
   }
 
   .rightGrid {
@@ -298,7 +302,7 @@ max-width:15%;
 display: grid;
 grid-column-gap: 2px;
 grid-row-gap: 3px;
-grid-template-columns: 1fr;
+grid-template-columns: 1fr 1fr;
 grid-template-rows: 1fr;
 padding:0px;
 max-height: 100%;
@@ -315,23 +319,6 @@ grid-template-rows: 1fr;
 padding:0px;
 text-align: right;
 direction: rtl;
-}
-
-.messagePanelforphase
-{
-  /*
-  background-color: rgb(196, 201, 205);
-  color: rgb(127, 14, 14);*/
-  background-color: rgb(33, 33, 33);
-  color: rgb(222, 0, 0);
-  border-radius:5px;
-  font-size:0.7em;
-  font-weight: 500;
-  height:75px;
-  padding:5px;
-  margin-left: 5px;
-  padding-left: 10px;
-  max-width:110px;
 }
 
 .actionLogPanel
@@ -370,7 +357,16 @@ width: 150px;
 height: 245px;
 margin: 2px;
 }
-
+.messagePanelforphase
+{
+  background-color: rgb(190, 177, 160);
+  text-align: center;
+column-span: 1;
+border-radius:5px;
+width: 150px;
+height: 245px;
+margin: 122px;
+}
 #messageWindow
 {
 font-size:0.7em;
@@ -494,6 +490,7 @@ grid-template-rows: 10px 1fr 1fr;
 grid-row-gap: 0px;
 padding: 0px;
 max-height: 100%;
+/* max-height: 27vh;*/
 }
 
 .deckGrid
@@ -596,53 +593,32 @@ direction:rtl;
 background-color: rgb(108, 75, 108);
 }
 
-#mainRoleCard
-{
-grid-column-start:5;
-grid-column-end:6;
-grid-row-start: 2;
-grid-row-end:4;
-padding:3px;
-direction:rtl;
-}
-/* colours used for observing position areas on the layout 
-#a5
-{
-background-color: rgb(108, 75, 108);
-}
-
-#b5
+.b5
 {
 background-color: rgb(196, 128, 174);
 
 }
 
-#c5
+.c5
 {
 background-color: rgb(141, 180, 231);
 
 }
 
-#d5
+.d5
 {
 background-color: rgb(150, 148, 118);
 }
 
-#e5
+.e5
 {
 background-color: rgb(252, 222, 191);
 }
 */
+
 .hidden
 {
   display: none !important;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
   
->>>>>>> 4a4aaec33b5d4884f08e9239f2f2201e8f6c60c8
-=======
-  
->>>>>>> origin/UIdev
