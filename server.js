@@ -26,6 +26,7 @@ let idround=1
 
 let statusphase=""
 let listcharactercards=[{"id":1,"charactername":"Suzy Lafayette","maxLife":4},{"id":2,"charactername":"Vulture Sam","maxLife":4},{"id":3,"charactername":"Willy The Kid","maxLife":4},{"id":4,"charactername":"Rose Doolan","maxLife":4},{"id":5,"charactername":"Paul Regret","maxLife":3}]
+let listrolecards=[{"id":1,"RoleCardName":"Sheriff"},{"id":2,"RoleCardName":"Outlaw"},{"id":3,"RoleCardName":"Outlaw"},{"id":4,"RoleCardName":"Renegade"},{"id":5,"RoleCardName":"Deputy"}]
 let player = {
   name: "name",
   socket: "empty",
@@ -61,7 +62,7 @@ function checkcurrenttime(){
      seconds = Math.floor((distance % (1000 * 60)) / 1000);
       //When starting game, we will start randomly give character card to each user
   if(statusgame=='START GAME'&&statuscharactercard==""){
-    getrandomcharactercards(listcharactercards)
+    getrandomcharactercards(listcharactercards,listrolecards)
     console.log(playerData)
     io.emit("randomgivecharacter",JSON.stringify(playerData))
     io.emit("weaponUpdate",JSON.stringify(playerData))
@@ -76,6 +77,17 @@ if(phasetime!=""){
 
 
 }
+function randomNum(max, used){
+  newNum = Math.floor(Math.random() * max + 1);
+ 
+   if(!(used.includes(newNum, used)) &&newNum<=5){
+    //console.log(newNum + " is not in array");
+    return newNum;
+ 
+   }else{
+    return randomNum(max,used);
+   }
+ }
 //Function for updating phase
 function updatephase(){
 if(statusgame=='START GAME'&&phasestatus==""){
@@ -124,46 +136,63 @@ if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==3){
 
 }
 //Function for giving random character cards
-function getrandomcharactercards(items){
+//also used to to distribute role card
+function getrandomcharactercards(items,listrolecards){
+  var usedNums=[]
+  var randNum=0
+  for(var i=0;i <5;i++){
+
+    randNum = randomNum(5, usedNums);
+    usedNums.push(randNum);
+ 
+    //do something with ranNum
+ }
+ console.log(usedNums)
+  let card=listrolecards[(usedNums[0]-1)];
   let item = items[Math.floor(Math.random() * items.length)];
   let charactername=item["charactername"]
   let maxlife=item["maxLife"]
   playerData[0].character=charactername
   playerData[0].maxLife=maxlife
+  playerData[0].role=card["RoleCardName"]
 
   let index = items.indexOf(item);
   items.splice(index, 1);
-
+  card=listrolecards[(usedNums[1]-1)];
    item = items[Math.floor(Math.random() * items.length)];
     charactername=item["charactername"]
     maxlife=item["maxLife"]
    playerData[1].character=charactername
    playerData[1].maxLife=maxlife
+   playerData[1].role=card["RoleCardName"]
 
    index = items.indexOf(item);
   items.splice(index, 1);
-
+  card=listrolecards[(usedNums[2]-1)];
    item = items[Math.floor(Math.random() * items.length)];
     charactername=item["charactername"]
     maxlife=item["maxLife"]
     playerData[2].maxLife=maxlife
    playerData[2].character=charactername
+   playerData[2].role=card["RoleCardName"]
    index = items.indexOf(item);
   items.splice(index, 1);
-
+  card=listrolecards[(usedNums[3]-1)];
    item = items[Math.floor(Math.random() * items.length)];
     charactername=item["charactername"]
     maxlife=item["maxLife"]
     playerData[3].maxLife=maxlife
    playerData[3].character=charactername
+   playerData[3].role=card["RoleCardName"]
    index = items.indexOf(item);
   items.splice(index, 1);
-
+  card=listrolecards[(usedNums[4]-1)];
    item = items[Math.floor(Math.random() * items.length)];
     charactername=item["charactername"]
     maxlife=item["maxLife"]
     playerData[4].maxLife=maxlife
     playerData[4].character=charactername
+    playerData[4].role=card["RoleCardName"]
 }
 
 
@@ -470,16 +499,75 @@ io.on('connection', (socket) => {
            col = db.collection("HistoryRecord");
            myobj = { RecordID: 1, Username : "Abo",Rank :1,Round:4}
            await col.insertOne(myobj);
+		   {/*
            col = db.collection("PlayingCard");
-           myobj = { PlayingCardID: 1, PlayingCardID :"ACE",PlayingCardDescription :"hbchj",PlayingCardImages:"101124"}
+           myobj = { PlayingCardID: 1, PlayingCardName :"bang",PlayingCardDescription :"Shoots a (reachable) player to take a life point",PlayingCardImages:"assets/cards/bang.png"}
            await col.insertOne(myobj);
+		   myobj = { PlayingCardID: 2, PlayingCardName :"beer",PlayingCardDescription :"Restores a life point",PlayingCardImages:"assets/cards/beer.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 3, PlayingCardName :"missed",PlayingCardDescription :"Cancels the effect of a bang card",PlayingCardImages:"assets/cards/missed.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 4, PlayingCardName :"gatling",PlayingCardDescription :"Shoots bang to all other players, regardless of distance",PlayingCardImages:"assets/cards/gatling.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 5, PlayingCardName :"scope",PlayingCardDescription :"See other players at a distance decreased by 1 ",PlayingCardImages:"assets/cards/scope.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 6, PlayingCardName :"mustang",PlayingCardDescription :"Others view you at distance +1",PlayingCardImages:"assets/cards/mustang.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 7, PlayingCardName :"remington",PlayingCardDescription :"Shoots a distance of 3",PlayingCardImages:"assets/cards/remington.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 8, PlayingCardName :"rev carabine",PlayingCardDescription :"Shoots a distance of 4",PlayingCardImages:"assets/cards/rev carabine.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 9, PlayingCardName :"schofield",PlayingCardDescription :"Shoots a distance of 2",PlayingCardImages:"assets/cards/schofield.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 10, PlayingCardName :"winchester",PlayingCardDescription :"Shoots a distance of 5",PlayingCardImages:"assets/cards/winchester.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 11, PlayingCardName :"volcanic",PlayingCardDescription :"Allows unlimited bang plays",PlayingCardImages:"assets/cards/volcanic.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 12, PlayingCardName :"saloon",PlayingCardDescription :"All players gain a life point",PlayingCardImages:"assets/cards/saloon.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 13, PlayingCardName :"Wells Fargo",PlayingCardDescription :"Draw three cards",PlayingCardImages:"assets/cards/Wells Fargo.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 14, PlayingCardName :"cat balou",PlayingCardDescription :"Force any one player to discard a card",PlayingCardImages:"assets/cards/cat balou.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 15, PlayingCardName :"stagecoach",PlayingCardDescription :"Draw two cards",PlayingCardImages:"assets/cards/stagecoach.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 16, PlayingCardName :"duel",PlayingCardDescription :"Target player discards a card, then you, etc; first without a bang to discard loses a life point",PlayingCardImages:"assets/cards/duel.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 17, PlayingCardName :"general store",PlayingCardDescription :"Reveal as many cards as players; each player draws one",PlayingCardImages:"assets/cards/general store.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 18, PlayingCardName :"indians",PlayingCardDescription :"All other players discard a bang or lose a life point",PlayingCardImages:"assets/cards/indians.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 19, PlayingCardName :"panic",PlayingCardDescription :"Draw a card from a player at distance 1",PlayingCardImages:"assets/cards/panic.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 20, PlayingCardName :"barrel",PlayingCardDescription :"Draw on a bang; hearts and you're missed!",PlayingCardImages:"assets/cards/barrel.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 21, PlayingCardName :"dynamite",PlayingCardDescription :"Draw on turn: for spades 2 to 9, lose 3 life points; else passes to the left-hand player",PlayingCardImages:"assets/cards/dynamite.png"}
+           await col.insertOne(myobj);
+           myobj = { PlayingCardID: 22, PlayingCardName :"jail",PlayingCardDescription :"Draw on turn then discard: for hearts play on; otherwise, skip turn. ",PlayingCardImages:"assets/cards/jail.png"}
+           await col.insertOne(myobj);
+           
            col = db.collection("RoleCard");
-           myobj = { RoleCardID: 1, RoleCardName :"ACE",RoleCardDescription :"hbchj",RoleCardImages:"101124"}
+           myobj = { RoleCardID: 1, RoleCardName :"Sheriff",RoleCardDescription :"Kill the Outlaws and Renegade",RoleCardImages:"assets/cards/Sheriff.png"}
            await col.insertOne(myobj);
+		   myobj = { RoleCardID: 2, RoleCardName :"Outlaw",RoleCardDescription :"Kill the Sheriff",RoleCardImages:"assets/cards/Outlaw.png"}
+           await col.insertOne(myobj);
+           myobj = { RoleCardID: 3, RoleCardName :"Renegade",RoleCardDescription :"Be the last one in play",RoleCardImages:"assets/cards/Renegade.png"}
+           await col.insertOne(myobj);
+           myobj = { RoleCardID: 4, RoleCardName :"Deputy",RoleCardDescription :"Protect the Sheriff; kill the Outlaws and Renegade",RoleCardImages:"assets/cards/Deputy.png"}
+           await col.insertOne(myobj);
+           
            col = db.collection("CharacterCard");
-           myobj = { CharacterCardID: 1, CharacterCardName :"ACE",CharacterCardDescription :"hbchj",CharacterCardImages:"101124"}
+           myobj = { CharacterCardID: 1, CharacterCardName :"Suzy Lafayette",CharacterCardDescription :"When her hand becomes empty, she draws a card",CharacterCardImages:"assets/cards/Suzy Lafayette.png"}
            await col.insertOne(myobj);
-  
+		   myobj = { CharacterCardID: 2, CharacterCardName :"Vulture Sam",CharacterCardDescription :"When a player is eliminated he takes all their cards",CharacterCardImages:"assets/cards/Vulture Sam.png"}
+           await col.insertOne(myobj);
+		   myobj = { CharacterCardID: 3, CharacterCardName :"Willy The Kid",CharacterCardDescription :"He can play any number of bangs",CharacterCardImages:"assets/cards/Willy The Kid.png"}
+           await col.insertOne(myobj);
+		   myobj = { CharacterCardID: 4, CharacterCardName :"Rose Doolan",CharacterCardDescription :"She sees all players at a distance decreased by one",CharacterCardImages:"assets/cards/Rose Doolan.png"}
+           await col.insertOne(myobj);
+		   myobj = { CharacterCardID: 5, CharacterCardName :"Paul Regret",CharacterCardDescription :"All players see him at a distance increased by one",CharacterCardImages:"assets/cards/Paul Regret.png"}
+           await col.insertOne(myobj);
+			*/}
   
            console.log("Inserted");
   
@@ -518,7 +606,8 @@ io.on('connection', (socket) => {
   run().catch(console.dir);
   }
 http.listen(3000, () => {
-  connection();
-  insertion(); //insertion now
+  //connection();
+  //insertion(); //insertion now
+  
   console.log('listening on *:3000');
 });
