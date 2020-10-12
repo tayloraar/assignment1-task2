@@ -7,6 +7,8 @@ const http = require('http').createServer(app);
 const io = require('socket.io')(http);
 const { MongoClient } = require("mongodb");
 const mongoose = require('mongoose');
+const getrandomcharactercards = require("./Modules-ServerSide/randomCharacterModule")
+const getrandomrolecards = require("./Modules-ServerSide/randomRoleModule")
 let count=0
 let listdesuser=[]
 let checkuserexist=false
@@ -25,7 +27,8 @@ let seconds=""
 let idround=1
 
 let statusphase=""
-let listcharactercards=[{"id":1,"charactername":"Suzy Lafayette","maxLife":4},{"id":2,"charactername":"Vulture Sam","maxLife":4},{"id":3,"charactername":"Willy The Kid","maxLife":4},{"id":4,"charactername":"Rose Doolan","maxLife":4},{"id":5,"charactername":"Paul Regret","maxLife":3}]
+let listcharactercards= require("./json lists/CharacterCardsList.json")
+let listedrolecards = require("./json lists/roleCardList.json")
 
 
 let player = {
@@ -63,13 +66,13 @@ function checkcurrenttime(){
      seconds = Math.floor((distance % (1000 * 60)) / 1000);
       //When starting game, we will start randomly give character card to each user
   if(statusgame=='START GAME'&&statuscharactercard==""){
-    getrandomcharactercards(listcharactercards)
-    console.log(playerData)
+    getrandomcharactercards.getrandomcharactercards(listcharactercards, playerData)
     io.emit("randomgivecharacter",JSON.stringify(playerData))
+    getrandomrolecards.getrandomRole(listedrolecards, playerData)
+    console.log(playerData)
+    
     io.emit("weaponUpdate",JSON.stringify(playerData))
     io.emit("updatePlayerName",JSON.stringify(playerData))
-    
-    
     statuscharactercard="Finished"
   }
   
@@ -122,55 +125,7 @@ if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==3){
   io.emit("infophase",statusphase)  
   return;
 }
-
-// if(statusphase!="")
-// console.log(statusphase)
-
 }
-//Function for giving random character cards
-function getrandomcharactercards(items){
-  let item = items[Math.floor(Math.random() * items.length)];
-  let charactername=item["charactername"]
-  let maxlife=item["maxLife"]
-  playerData[0].character=charactername
-  playerData[0].maxLife=maxlife
-
-  let index = items.indexOf(item);
-  items.splice(index, 1);
-
-   item = items[Math.floor(Math.random() * items.length)];
-    charactername=item["charactername"]
-    maxlife=item["maxLife"]
-   playerData[1].character=charactername
-   playerData[1].maxLife=maxlife
-
-   index = items.indexOf(item);
-  items.splice(index, 1);
-
-   item = items[Math.floor(Math.random() * items.length)];
-    charactername=item["charactername"]
-    maxlife=item["maxLife"]
-    playerData[2].maxLife=maxlife
-   playerData[2].character=charactername
-   index = items.indexOf(item);
-  items.splice(index, 1);
-
-   item = items[Math.floor(Math.random() * items.length)];
-    charactername=item["charactername"]
-    maxlife=item["maxLife"]
-    playerData[3].maxLife=maxlife
-   playerData[3].character=charactername
-   index = items.indexOf(item);
-  items.splice(index, 1);
-
-   item = items[Math.floor(Math.random() * items.length)];
-    charactername=item["charactername"]
-    maxlife=item["maxLife"]
-    playerData[4].maxLife=maxlife
-    playerData[4].character=charactername
-}
-
-
 
 //Function to update user id (position) after one user go out the game room
 function  order_user(deleteid)
