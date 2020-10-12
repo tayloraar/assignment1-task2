@@ -27,4 +27,6 @@ window.onload = function(e){
   getinforphase()
   updatetime()
   updateWeapon()
+  updateName()
+  displayWelcomeScreen()
 }

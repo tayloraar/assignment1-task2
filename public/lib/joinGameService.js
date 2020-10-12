@@ -31,7 +31,45 @@ $(document).ready(function(){
       alert("Username is not null")
     }
     });
+
+    $("#joinName").keypress(function(event){
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13'){
+        let username=$('#joinName').val()
+        let action= 'joined the game'
+        if(username!=""){
+        const user={
+          user:username,
+          socket:socketid,
+          }
+        $.get('/submitname',user, function (responsedata) {
+          alert(responsedata)
+          if(responsedata=="Successful"){
+          nameplayer=user.user
+  
+            let data = {
+              name: username,
+              action: action,
+              socket: socketid
+            }
+            
+          $.get('/actionLog',data)
+          $.get('/newUser', data)
+          
+
+        }
+          statusregis=responsedata     
+        })
+        $('#joinName').val("")
+        setTimeout(displayGameBoard(), 1000);
+      }
+      else{
+        alert("Username is not null")
+      }
+      }
   });
+  });
+
 
 
 

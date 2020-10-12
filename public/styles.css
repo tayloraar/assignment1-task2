@@ -1,7 +1,7 @@
 
 html, body {
-  height: 95vh;
-  width: 90vw;
+  height: 100vh;
+  width: 98.9vw;
   margin: auto;
   }
 
@@ -15,7 +15,7 @@ display: grid;
 grid-template-rows: 3fr 2fr 1fr 6fr 2fr 2fr;
 grid-template-columns: 1fr 1fr 1fr;
 font-family:Verdana, Geneva, Tahoma, sans-serif;
-  height: 95vh;
+  height: 100vh;
   padding: 0px;
   background-color: rgb(175, 218, 246);
   background-image: url('assets/WelcomeBackdrop.png');
@@ -167,7 +167,7 @@ width:20px;
     grid-template-rows: 1fr 1fr 240px;
     grid-row-gap: 5px;
     padding: 10px;
-    height:100%;
+    height:100vh;
     margin-bottom:0px;
 }
   .leftGrid {
@@ -199,7 +199,7 @@ width:20px;
 display: grid;
 grid-template-columns: 45% 10% 45%;
 grid-template-rows: 1fr;
-  /*max-height: 30vh;*/
+  max-height: 30vh;
   padding: 0px;
   grid-row-start: 1;
   grid-row-end:2;
@@ -225,7 +225,7 @@ grid-template-rows: 1fr;
 display: grid;
 grid-template-columns: 150px 1fr 150px;
 grid-template-rows: 1fr;
-/*height: 250px;*/
+height: 250px;
 padding: 0px;
 grid-row-start: 3;
 grid-row-end:4;
@@ -362,6 +362,8 @@ margin: 2px;
   background-color: rgb(190, 177, 160);
   text-align: center;
 column-span: 1;
+grid-row-start: 3;
+grid-row-end: 3;
 border-radius:5px;
 width: 150px;
 height: 245px;
