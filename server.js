@@ -92,6 +92,8 @@ if(phasestatus=="Starting"){
    statusphase={id:idround,phase:1,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
    phasetime=new Date (currenttime );
    phasetime.setSeconds (phasetime.getSeconds() + 15 );
+   data = {name: statusphase.name, action: ` Started Phase ${statusphase.phase} `}
+   io.emit("updateactionlog",data)
    io.emit("infophase",statusphase)  
    phasestatus="Ongoing"
   return;
@@ -100,6 +102,8 @@ if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==1){
   statusphase={id:idround,phase:2,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
   phasetime=new Date (currenttime );
   phasetime.setSeconds ( phasetime.getSeconds() + 60 );  
+  data = {name: statusphase.name, action: ` Started Phase ${statusphase.phase} `}
+  io.emit("updateactionlog",data)
   io.emit("infophase",statusphase)  
   return;
 
@@ -108,6 +112,8 @@ if(minutes==0&&seconds==0&&phasestatus=="Ongoing"&&statusphase.phase==2){
   statusphase={id:idround,phase:3,name:playerData[idround-1].name,socket:playerData[idround-1].socket}
    phasetime=new Date (currenttime );
    phasetime.setSeconds (phasetime.getSeconds() + 20 );
+   data = {name: statusphase.name, action: ` Started Phase ${statusphase.phase} `}
+   io.emit("updateactionlog",data)
    io.emit("infophase",statusphase)    
    return;
 
