@@ -26,6 +26,8 @@ let idround=1
 
 let statusphase=""
 let listcharactercards=[{"id":1,"charactername":"Suzy Lafayette","maxLife":4},{"id":2,"charactername":"Vulture Sam","maxLife":4},{"id":3,"charactername":"Willy The Kid","maxLife":4},{"id":4,"charactername":"Rose Doolan","maxLife":4},{"id":5,"charactername":"Paul Regret","maxLife":3}]
+
+
 let player = {
   name: "name",
   socket: "empty",
