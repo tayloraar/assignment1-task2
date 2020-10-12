@@ -29,4 +29,6 @@ window.onload = function(e){
   updateWeapon()
   updateName()
   displayWelcomeScreen()
+  displayHand()
+  updateRole()
 }

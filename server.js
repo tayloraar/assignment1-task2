@@ -29,6 +29,7 @@ let idround=1
 let statusphase=""
 let listcharactercards= require("./json lists/CharacterCardsList.json")
 let listedrolecards = require("./json lists/roleCardList.json")
+let newPlayer = require("./json lists/playerDataList.json")
 
 
 let player = {
@@ -70,9 +71,10 @@ function checkcurrenttime(){
     io.emit("randomgivecharacter",JSON.stringify(playerData))
     getrandomrolecards.getrandomRole(listedrolecards, playerData)
     console.log(playerData)
-    
+    io.emit("updateRole",JSON.stringify(playerData))
     io.emit("weaponUpdate",JSON.stringify(playerData))
     io.emit("updatePlayerName",JSON.stringify(playerData))
+    io.emit("handUpdate",JSON.stringify(playerData))
     statuscharactercard="Finished"
   }
   
@@ -207,13 +209,18 @@ let newPlayer =  {
   maxLife: "maxLife",
   currentLife: "currentLife",
   weapon: "colt45",
+  range: 1,
+  distanceMod: 0,
   scope: false,
   mustang: false,
   barrel: false,
   jail: false,
   dynamite: false,
   hand: [
-      {"id": 1, "name": 'empty', }
+      {"id": 1, "card": 'bang', },
+      {"id": 2, "card": 'bang', },
+      {"id": 3, "card": 'missed', },
+      {"id": 4, "card": 'missed', },
   ],
 }
 playerData.push(newPlayer);
@@ -345,7 +352,6 @@ io.on('connection', (socket) => {
           console.log("Connected correctly to server");
           const db = client.db("project");
   
-           
            var col = db.collection("login");
            var myobj = { username: "voungtan", address: "Highway 37" };
            await col.insertOne(myobj);

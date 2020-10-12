@@ -17,6 +17,8 @@ $(document).ready(function(){
    <script src="lib/turnPhaseService.js"></script>
    <script src="lib/joinGameService.js"></script>
    <script src="lib/playerNameService.js"></script>
+   <script src="lib/updateHandService.js"></script>
+   <script src="lib/roleCardService.js"></script>
     
     `)}
 );
