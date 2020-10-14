@@ -23,6 +23,7 @@ $(document).ready(function(){
         $.get('/actionLog',data)
         $.get('/newUser', data)
       }
+      setTimeout(displayGameBoard(), 1000);
         statusregis=responsedata     
       })
       $('#joinName').val("")
@@ -56,12 +57,12 @@ $(document).ready(function(){
           $.get('/actionLog',data)
           $.get('/newUser', data)
           
-
+          setTimeout(displayGameBoard(), 1000);
         }
           statusregis=responsedata     
         })
         $('#joinName').val("")
-        setTimeout(displayGameBoard(), 1000);
+        
       }
       else{
         alert("Username is not null")

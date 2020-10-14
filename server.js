@@ -75,6 +75,7 @@ function checkcurrenttime(){
     io.emit("weaponUpdate",JSON.stringify(playerData))
     io.emit("updatePlayerName",JSON.stringify(playerData))
     io.emit("handUpdate",JSON.stringify(playerData))
+    io.emit("bangUpdate",JSON.stringify(playerData))
     statuscharactercard="Finished"
   }
   
@@ -320,6 +321,24 @@ app.get('/actionLog', function(req, res){
     io.emit("updateactionlog",data)
     res.send("action log hit")
     });
+
+    
+app.get('/shootBang', function(req,res){
+  const targetId = req.query.targetId
+  const attackerName = req.query.name
+  playerData.forEach(player => {
+    if(player.id==targetId){
+      player.currentLife = player.currentLife -1
+      const data ={
+        name: attackerName,
+        action: `shot ${player.name}`
+      }
+      io.emit("updateactionlog",data)
+      res.send (console.log(`${player.name} is now on ${player.currentLife} lives`))
+    }
+  })
+ 
+})
 
 app.get('/newUser', function(data){
     const name = data.name

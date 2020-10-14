@@ -8,8 +8,13 @@
                console.log(hand)
                for (var i =0; i < hand.length; i++){
                  console.log(hand[i].card)
-                $('#mainHand').append(`<img src="assets/cards/${hand[i].card}.png" alt="${hand[i].card}" class="responsive ${hand[i].card}">`)  
-               }
+                $('#mainHand').append(`<img data-target="${hand[i].card}Modal" href="#${hand[i].card}Modal"src="assets/cards/${hand[i].card}.png" alt="${hand[i].card}" class="responsive ${hand[i].card}">`)  
+               
+                $(`.${hand[i].card}`).click(function() {
+                  console.log(`Card Hit`)
+                  $(`#bangModal`).modal('open') ;
+                  });
+              }
             }
             })      
           })

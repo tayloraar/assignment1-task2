@@ -31,4 +31,6 @@ window.onload = function(e){
   displayWelcomeScreen()
   displayHand()
   updateRole()
+  updateBang()
+  // shotBang()
 }
