@@ -32,5 +32,6 @@ window.onload = function(e){
   displayHand()
   updateRole()
   updateBang()
+  //missedOption()
   // shotBang()
 }

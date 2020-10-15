@@ -328,17 +328,29 @@ app.get('/shootBang', function(req,res){
   const attackerName = req.query.name
   playerData.forEach(player => {
     if(player.id==targetId){
-      player.currentLife = player.currentLife -1
-      const data ={
-        name: attackerName,
-        action: `shot ${player.name}`
-      }
-      io.emit("updateactionlog",data)
-      res.send (console.log(`${player.name} is now on ${player.currentLife} lives`))
+      player.hand.forEach(card=>{
+        console
+        if (card.card =="missed"){
+        io.to(player.socket).emit("missedOption",playerData, attackerName)
+        }
+        // else{
+        //   // player.currentLife = player.currentLife -1
+        //   // const data ={
+        //   //   name: attackerName,
+        //   //   action: `shot ${player.name}`
+        //   // }
+        //   // io.emit("updateactionlog",data)
+        //   // res.send (console.log(`${player.name} is now on ${player.currentLife} lives`))
+        // }
+      })
+    
+      
     }
+     
+    })
+  //  playerData.forEach(attacker =>{})
   })
  
-})
 
 app.get('/newUser', function(data){
     const name = data.name
@@ -357,6 +369,8 @@ io.on('connection', (socket) => {
       userdisconnection(socket.id)
       io.emit("updateactionlog",data) 
       });
+
+
   });
 
 

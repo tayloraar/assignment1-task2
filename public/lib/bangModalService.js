@@ -17,28 +17,6 @@ function updateBang(){
     })
   }
 
-  //Update Hand
-  // function shootBang(){
-  //   socket.on("shootBang",data=>{
-  //   const mydata= JSON.parse(data)
-  //    mydata.forEach((data) => {
-  //     if(data.socket==socketid){
-  //       let hand = data.hand
-  //        console.log(hand)
-  //        for (var i =0; i < hand.length; i++){
-  //          console.log(hand[i].card)
-  //         $('#mainHand').append(`<img data-target="${hand[i].card}Modal" href="#${hand[i].card}Modal"src="assets/cards/${hand[i].card}.png" alt="${hand[i].card}" class="responsive ${hand[i].card}">`)  
-         
-  //         $(`.${hand[i].card}`).click(function() {
-  //           console.log(`Card Hit`)
-  //           $(`#bangModal`).modal('open') ;
-  //           });
-  //       }
-  //     }
-  //     })      
-  //   })
-  // }
-  //Get display order for wapon card
   function displayBang(mydata,data){
     console.log(data.id)
   if(data.id==1){
@@ -157,7 +135,7 @@ function updateBang(){
 
   }
 
-  $(`.btn-floating`).click(function() {
+  $(`#bangModal .btn-floating`).click(function() {
     // $(this).data("target")
     data ={
       targetId: $(this).data("target"),
@@ -165,6 +143,9 @@ function updateBang(){
     }
     $.get('/shootBang', data)
   });
+
+
+
   }
 
 

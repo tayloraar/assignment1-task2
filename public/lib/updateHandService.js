@@ -10,7 +10,7 @@
                  console.log(hand[i].card)
                 $('#mainHand').append(`<img data-target="${hand[i].card}Modal" href="#${hand[i].card}Modal"src="assets/cards/${hand[i].card}.png" alt="${hand[i].card}" class="responsive ${hand[i].card}">`)  
                
-                $(`.${hand[i].card}`).click(function() {
+                $(`.bang`).click(function() {
                   console.log(`Card Hit`)
                   $(`#bangModal`).modal('open') ;
                   });
