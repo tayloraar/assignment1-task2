@@ -217,6 +217,7 @@ let newPlayer =  {
   barrel: false,
   jail: false,
   dynamite: false,
+  eliminated: false,
   hand: [
       {"id": 1, "card": 'bang', },
       {"id": 2, "card": 'bang', },
@@ -330,18 +331,18 @@ app.get('/shootBang', function(req,res){
     if(player.id==targetId){
       player.hand.forEach(card=>{
         console
-        if (card.card =="missed"){
+        if (card.some =="missed"){
         io.to(player.socket).emit("missedOption",playerData, attackerName)
         }
-        // else{
-        //   // player.currentLife = player.currentLife -1
-        //   // const data ={
-        //   //   name: attackerName,
-        //   //   action: `shot ${player.name}`
-        //   // }
-        //   // io.emit("updateactionlog",data)
-        //   // res.send (console.log(`${player.name} is now on ${player.currentLife} lives`))
-        // }
+        else{
+          player.currentLife = player.currentLife -1
+          const data ={
+            name: attackerName,
+            action: `shot ${player.name}`
+          }
+          io.emit("updateactionlog",data)
+          res.send (console.log(`${player.name} is now on ${player.currentLife} lives`))
+        }
       })
     
       

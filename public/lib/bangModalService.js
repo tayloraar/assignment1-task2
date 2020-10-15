@@ -21,7 +21,7 @@ function updateBang(){
     console.log(data.id)
   if(data.id==1){
     // c5
-    $("#c5bangModal .card-image").append(`<img data-target="${mydata[2].character}Modal" href="#${mydata[2].character}Modal"src="assets/cards/${mydata[2].character}.png" alt="${mydata[2].character}" class="responsive ${mydata[2].character}">`)
+    $("#c5bangModal .card-image").append(`<img data-distance="2" data-target="${mydata[2].character}Modal" href="#${mydata[2].character}Modal"src="assets/cards/${mydata[2].character}.png" alt="${mydata[2].character}" class="responsive ${mydata[2].character}">`)
     $("#c5bangModal .card-content").append(`${mydata[2].name}`)
     $("#c5bangModal .btn-floating").attr('data-target',`${mydata[2].id}`)
       
