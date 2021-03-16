@@ -15,8 +15,8 @@ var log = function(message){
   var time=moment().format();
   console.log( `[Server] @ ${time} ${message}`);
 }
-
-var port = 8080;
+var port = process.env.PORT || 8080;
+//var port = 8080;
 app.listen(port);
 log(`server listening on: ${port}`);
 
