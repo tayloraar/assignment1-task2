@@ -16,7 +16,7 @@ var log = function(message){
   console.log( `[Server] @ ${time} ${message}`);
 }
 
-var port = 3000;
+var port = 8080;
 app.listen(port);
 log(`server listening on: ${port}`);
 
