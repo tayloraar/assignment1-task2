@@ -1,0 +1,6 @@
+
+---
+applications:
+- name:    Fakergram-test
+  random-route: true
+  memory:  128M
