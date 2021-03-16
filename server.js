@@ -91,6 +91,9 @@ const retrievePostNum=(res)=>{
 }
 
 // Opens the application after 2 seconds, timer just incase.
-setTimeout( function(){
-  open("http://localhost:3000/");
- }, 2000 );
+// setTimeout( function(){
+//   open("http://localhost:3000/");
+//  }, 2000 );
+
+ //this is only needed for Cloud foundry 
+require("cf-deployment-tracker-client").track();
